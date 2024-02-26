@@ -23,8 +23,6 @@ class PostSchema extends Schema
 
     /**
      * The maximum include path depth.
-     *
-     * @var int
      */
     protected int $maxDepth = 3;
 
