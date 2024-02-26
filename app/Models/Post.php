@@ -19,7 +19,7 @@ class Post extends Model
         'content',
         'published_at',
         'slug',
-        'title'
+        'title',
     ];
 
     /**
@@ -29,25 +29,16 @@ class Post extends Model
         'published_at' => 'datetime',
     ];
 
-    /**
-     * @return BelongsTo
-     */
     public function author(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    /**
-     * @return HasMany
-     */
     public function comments(): HasMany
     {
         return $this->hasMany(Comment::class);
     }
 
-    /**
-     * @return BelongsToMany
-     */
     public function tags(): BelongsToMany
     {
         return $this->belongsToMany(Tag::class);
