@@ -44,6 +44,7 @@ class PostSchema extends Schema
             BelongsTo::make('author')->type('users')->readOnly(),
             HasMany::make('comments')->readOnly(),
             BelongsToMany::make('tags'),
+            BelongsToMany::make('categories'),
 
             DateTime::make('createdAt')->sortable()->readOnly(),
             DateTime::make('updatedAt')->sortable()->readOnly(),
