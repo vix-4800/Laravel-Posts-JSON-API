@@ -28,5 +28,22 @@ JsonApiRoute::server('v1')->prefix('v1')->resources(function (ResourceRegistrar 
             $relations->hasOne('author')->readOnly();
             $relations->hasMany('comments')->readOnly();
             $relations->hasMany('tags');
+            $relations->hasMany('categories');
+        });
+
+    $server->resource('categories', JsonApiController::class)
+        ->relationships(function (Relationships $relations) {
+            $relations->hasMany('posts');
+        });
+
+    $server->resource('tags', JsonApiController::class)
+        ->relationships(function (Relationships $relations) {
+            $relations->hasMany('posts');
+        });
+
+    $server->resource('comments', JsonApiController::class)
+        ->relationships(function (Relationships $relations) {
+            $relations->hasOne('user')->readOnly();
+            $relations->hasOne('post')->readOnly();
         });
 });
