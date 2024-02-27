@@ -13,8 +13,6 @@ class PostSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory(15)->create();
-
         Post::factory(150)->create([
             'author_id' => random_int(1, 15),
         ]);
