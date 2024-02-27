@@ -11,6 +11,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $this->call(PostSeeder::class);
+        $seeders = [
+            PostSeeder::class,
+        ];
+
+        foreach ($seeders as $seeder) {
+            $this->call($seeder);
+        }
     }
 }
