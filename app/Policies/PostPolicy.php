@@ -10,9 +10,9 @@ class PostPolicy
     /**
      * Determine whether the user can view any models.
      */
-    public function viewAny(User $user): bool
+    public function viewAny(?User $user): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -76,8 +76,6 @@ class PostPolicy
     /**
      * Determine whether the user can update the model's tags relationship.
      *
-     * @param User $user
-     * @param Post $post
      * @return bool|\Illuminate\Auth\Access\Response
      */
     public function updateTags(User $user, Post $post)
@@ -88,8 +86,6 @@ class PostPolicy
     /**
      * Determine whether the user can attach tags to the model's tags relationship.
      *
-     * @param User $user
-     * @param Post $post
      * @return bool|\Illuminate\Auth\Access\Response
      */
     public function attachTags(User $user, Post $post)
@@ -100,8 +96,6 @@ class PostPolicy
     /**
      * Determine whether the user can detach tags from the model's tags relationship.
      *
-     * @param User $user
-     * @param Post $post
      * @return bool|\Illuminate\Auth\Access\Response
      */
     public function detachTags(User $user, Post $post)
@@ -114,7 +108,7 @@ class PostPolicy
      */
     public function delete(User $user, Post $post): bool
     {
-        //
+        return $this->update($user, $post);
     }
 
     /**

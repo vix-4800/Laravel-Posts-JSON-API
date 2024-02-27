@@ -3,6 +3,8 @@
 namespace App\JsonApi\V1\Posts;
 
 use App\Models\Post;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\Request;
 use LaravelJsonApi\Eloquent\Contracts\Paginator;
 use LaravelJsonApi\Eloquent\Fields\DateTime;
 use LaravelJsonApi\Eloquent\Fields\ID;
@@ -37,7 +39,7 @@ class PostSchema extends Schema
             Str::make('title')->sortable(),
             Str::make('slug'),
             Str::make('content'),
-            DateTime::make('published_at')->readOnly(),
+            DateTime::make('publishedAt')->readOnly(),
 
             BelongsTo::make('author')->type('users')->readOnly(),
             HasMany::make('comments')->readOnly(),
@@ -67,5 +69,16 @@ class PostSchema extends Schema
             ->withPageKey('page')
             ->withPerPageKey('limit')
             ->withDefaultPerPage(15);
+    }
+
+    public function indexQuery(?Request $request, Builder $query): Builder
+    {
+        if ($user = optional($request)->user()) {
+            return $query->where(function (Builder $query) use ($user) {
+                return $query->whereNotNull('published_at')->orWhere('author_id', $user->getKey());
+            });
+        }
+
+        return $query->whereNotNull('published_at');
     }
 }

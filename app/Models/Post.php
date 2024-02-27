@@ -20,6 +20,7 @@ class Post extends Model
         'published_at',
         'slug',
         'title',
+        'author_id',
     ];
 
     /**
