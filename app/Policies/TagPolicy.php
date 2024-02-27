@@ -20,7 +20,12 @@ class TagPolicy
      */
     public function view(User $user, Tag $tag): bool
     {
-        //
+        return true;
+    }
+
+    public function viewPosts(User $user, Tag $tag): bool
+    {
+        return $this->view($user, $tag);
     }
 
     /**
