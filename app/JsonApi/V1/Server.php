@@ -2,10 +2,6 @@
 
 namespace App\JsonApi\V1;
 
-use App\JsonApi\V1\Comments\CommentSchema;
-use App\JsonApi\V1\Posts\PostSchema;
-use App\JsonApi\V1\Tags\TagSchema;
-use App\JsonApi\V1\Users\UserSchema;
 use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
 use LaravelJsonApi\Core\Server\Server as BaseServer;
@@ -35,10 +31,11 @@ class Server extends BaseServer
     protected function allSchemas(): array
     {
         return [
-            PostSchema::class,
-            TagSchema::class,
-            UserSchema::class,
-            CommentSchema::class,
+            Posts\PostSchema::class,
+            Tags\TagSchema::class,
+            Users\UserSchema::class,
+            Comments\CommentSchema::class,
+            Categories\CategorySchema::class,
         ];
     }
 }
