@@ -4,6 +4,7 @@ namespace App\Policies;
 
 use App\Models\Post;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class PostPolicy
 {
@@ -29,30 +30,32 @@ class PostPolicy
 
     /**
      * Determine whether the user can view the post's author.
-     *
-     * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function viewAuthor(?User $user, Post $post)
+    public function viewAuthor(?User $user, Post $post): bool
     {
         return $this->view($user, $post);
     }
 
     /**
      * Determine whether the user can view the post's comments.
-     *
-     * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function viewComments(?User $user, Post $post)
+    public function viewComments(?User $user, Post $post): bool
     {
         return $this->view($user, $post);
     }
 
     /**
      * Determine whether the user can view the post's tags.
-     *
-     * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function viewTags(?User $user, Post $post)
+    public function viewTags(?User $user, Post $post): bool
+    {
+        return $this->view($user, $post);
+    }
+
+    /**
+     * Determine whether the user can view the post's categories.
+     */
+    public function viewCategories(?User $user, Post $post): bool
     {
         return $this->view($user, $post);
     }
@@ -62,7 +65,7 @@ class PostPolicy
      */
     public function create(User $user): bool
     {
-        return true;
+        return Auth::check();
     }
 
     /**
@@ -75,30 +78,39 @@ class PostPolicy
 
     /**
      * Determine whether the user can update the model's tags relationship.
-     *
-     * @return bool|\Illuminate\Auth\Access\Response
      */
-    public function updateTags(User $user, Post $post)
+    public function updateTags(User $user, Post $post): bool
+    {
+        return $this->update($user, $post);
+    }
+
+    public function updateCategories(User $user, Post $post): bool
     {
         return $this->update($user, $post);
     }
 
     /**
      * Determine whether the user can attach tags to the model's tags relationship.
-     *
-     * @return bool|\Illuminate\Auth\Access\Response
      */
-    public function attachTags(User $user, Post $post)
+    public function attachTags(User $user, Post $post): bool
+    {
+        return $this->update($user, $post);
+    }
+
+    public function attachCategories(User $user, Post $post): bool
     {
         return $this->update($user, $post);
     }
 
     /**
      * Determine whether the user can detach tags from the model's tags relationship.
-     *
-     * @return bool|\Illuminate\Auth\Access\Response
      */
-    public function detachTags(User $user, Post $post)
+    public function detachTags(User $user, Post $post): bool
+    {
+        return $this->update($user, $post);
+    }
+
+    public function detachCategories(User $user, Post $post): bool
     {
         return $this->update($user, $post);
     }
@@ -109,21 +121,5 @@ class PostPolicy
     public function delete(User $user, Post $post): bool
     {
         return $this->update($user, $post);
-    }
-
-    /**
-     * Determine whether the user can restore the model.
-     */
-    public function restore(User $user, Post $post): bool
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     */
-    public function forceDelete(User $user, Post $post): bool
-    {
-        //
     }
 }
