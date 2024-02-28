@@ -24,32 +24,42 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 JsonApiRoute::server('v1')->prefix('v1')->resources(function (ResourceRegistrar $server) {
     $server->resource('posts', JsonApiController::class)
-        ->relationships(function (Relationships $relations) {
-            $relations->hasOne('author')->readOnly();
-            $relations->hasMany('comments')->readOnly();
-            $relations->hasMany('tags');
-            $relations->hasMany('categories');
-        });
+        ->relationships(
+            function (Relationships $relations) {
+                $relations->hasOne('author')->readOnly();
+                $relations->hasMany('comments')->readOnly();
+                $relations->hasMany('tags');
+                $relations->hasMany('categories');
+            }
+        );
 
     $server->resource('categories', JsonApiController::class)
-        ->relationships(function (Relationships $relations) {
-            $relations->hasMany('posts');
-        });
+        ->relationships(
+            function (Relationships $relations) {
+                $relations->hasMany('posts')->readOnly();
+            }
+        );
 
     $server->resource('tags', JsonApiController::class)
-        ->relationships(function (Relationships $relations) {
-            $relations->hasMany('posts');
-        });
+        ->relationships(
+            function (Relationships $relations) {
+                $relations->hasMany('posts')->readOnly();
+            }
+        );
 
     $server->resource('comments', JsonApiController::class)
-        ->relationships(function (Relationships $relations) {
-            $relations->hasOne('user')->readOnly();
-            $relations->hasOne('post')->readOnly();
-        });
+        ->relationships(
+            function (Relationships $relations) {
+                $relations->hasOne('user')->readOnly();
+                $relations->hasOne('post');
+            }
+        );
 
     $server->resource('users', JsonApiController::class)
-        ->relationships(function (Relationships $relations) {
-            $relations->hasOne('posts');
-            $relations->hasOne('comments');
-        });
+        ->relationships(
+            function (Relationships $relations) {
+                $relations->hasOne('posts');
+                $relations->hasOne('comments');
+            }
+        );
 });
