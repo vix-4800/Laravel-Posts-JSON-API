@@ -31,8 +31,8 @@ class TagSchema extends Schema
 
             BelongsToMany::make('posts'),
 
-            DateTime::make('createdAt')->sortable()->readOnly(),
-            DateTime::make('updatedAt')->sortable()->readOnly(),
+            DateTime::make('created_at')->sortable()->readOnly(),
+            DateTime::make('updated_at')->sortable()->readOnly(),
         ];
     }
 
