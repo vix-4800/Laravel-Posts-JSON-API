@@ -1,0 +1,2574 @@
+openapi: 3.0.0
+
+info:
+  title: Local JSON:API
+  version: 1.0.0
+  
+servers:
+  - url: http://localhost:8000/api
+  
+components:
+  securitySchemes:
+    noauthAuth:
+      type: http
+      scheme: noauth
+    bearerAuth:
+      type: http
+      scheme: bearer
+      
+security:
+  - bearerAuth: []
+  
+paths:
+  /v1/posts:
+    get:
+      tags:
+        - Posts
+      summary: Get all posts
+      description: This endpoint retrieves a list of all inscances from the specified
+        model.
+      security:
+        - noauthAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            Host:
+              schema:
+                type: string
+                example: localhost
+            Connection:
+              schema:
+                type: string
+                example: close
+            X-Powered-By:
+              schema:
+                type: string
+                example: PHP/8.3.3-1+ubuntu22.04.1+deb.sury.org+1
+            Content-Type:
+              schema:
+                type: string
+                example: application/vnd.api+json
+            Cache-Control:
+              schema:
+                type: string
+                example: no-cache, private
+            Date:
+              schema:
+                type: string
+                example: Wed, 28 Feb 2024 14:30:56 GMT
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+                example: '60'
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+                example: '59'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                jsonapi:
+                  version: '1.0'
+                data:
+                  - type: posts
+                    id: '1'
+                    attributes:
+                      title: ut vero harum aut earum
+                      slug: >-
+                        modi-ea-tempora-impedit-dolorum-similique-expedita-suscipit
+                      content: >-
+                        Velit ipsa et nihil pariatur hic aliquam. Recusandae
+                        delectus cumque aliquid nihil animi quia. Accusamus
+                        ullam nihil qui exercitationem.
+                      published_at: '2011-12-20T07:07:43.000000Z'
+                      created_at: '2024-02-28T13:24:32.000000Z'
+                      updated_at: '2024-02-28T13:24:32.000000Z'
+                    relationships:
+                      author:
+                        links:
+                          related: http://localhost/api/v1/posts/1/author
+                          self: http://localhost/api/v1/posts/1/relationships/author
+                      comments:
+                        links:
+                          related: http://localhost/api/v1/posts/1/comments
+                          self: >-
+                            http://localhost/api/v1/posts/1/relationships/comments
+                      tags:
+                        links:
+                          related: http://localhost/api/v1/posts/1/tags
+                          self: http://localhost/api/v1/posts/1/relationships/tags
+                      categories:
+                        links:
+                          related: http://localhost/api/v1/posts/1/categories
+                          self: >-
+                            http://localhost/api/v1/posts/1/relationships/categories
+                    links:
+                      self: http://localhost/api/v1/posts/1
+    post:
+      tags:
+        - Posts
+      summary: Create new post
+      description: >-
+        This endpoint allows you to create a new model with the specified
+        relationships.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                data:
+                  type: posts
+                  attributes:
+                    content: ''
+                    published_at: null
+                    slug: ''
+                    title: ''
+      responses:
+        '201':
+          description: Created
+          headers:
+            Host:
+              schema:
+                type: string
+                example: localhost:8000
+            Connection:
+              schema:
+                type: string
+                example: close
+            X-Powered-By:
+              schema:
+                type: string
+                example: PHP/8.3.1
+            Content-Type:
+              schema:
+                type: string
+                example: application/vnd.api+json
+            Location:
+              schema:
+                type: string
+                example: http://localhost:8000/api/v1/posts/151
+            Cache-Control:
+              schema:
+                type: string
+                example: no-cache, private
+            Date:
+              schema:
+                type: string
+                example: Wed, 28 Feb 2024 17:36:42 GMT
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+                example: '60'
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+                example: '59'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                jsonapi:
+                  version: '1.0'
+                links:
+                  self: http://localhost:8000/api/v1/posts/151
+                data:
+                  type: posts
+                  id: '151'
+                  attributes:
+                    title: New post title
+                    slug: new-post
+                    content: New post content
+                    published_at: null
+                    created_at: '2024-02-28T17:36:42.000000Z'
+                    updated_at: '2024-02-28T17:36:42.000000Z'
+                  relationships:
+                    author:
+                      links:
+                        related: http://localhost:8000/api/v1/posts/151/author
+                        self: >-
+                          http://localhost:8000/api/v1/posts/151/relationships/author
+                      data:
+                        type: users
+                        id: '1'
+                    comments:
+                      links:
+                        related: http://localhost:8000/api/v1/posts/151/comments
+                        self: >-
+                          http://localhost:8000/api/v1/posts/151/relationships/comments
+                    tags:
+                      links:
+                        related: http://localhost:8000/api/v1/posts/151/tags
+                        self: >-
+                          http://localhost:8000/api/v1/posts/151/relationships/tags
+                      data:
+                        - type: tags
+                          id: '3'
+                    categories:
+                      links:
+                        related: http://localhost:8000/api/v1/posts/151/categories
+                        self: >-
+                          http://localhost:8000/api/v1/posts/151/relationships/categories
+                  links:
+                    self: http://localhost:8000/api/v1/posts/151
+                included:
+                  - type: users
+                    id: '1'
+                    attributes:
+                      name: Lizeth Roob
+                      email: sawayn.pearl@example.org
+                      email_verified_at: '2024-02-28T16:42:48.000000Z'
+                      created_at: '2024-02-28T16:42:49.000000Z'
+                      updated_at: '2024-02-28T16:42:49.000000Z'
+                    relationships:
+                      posts:
+                        links:
+                          related: http://localhost:8000/api/v1/users/1/posts
+                          self: >-
+                            http://localhost:8000/api/v1/users/1/relationships/posts
+                      comments:
+                        links:
+                          related: http://localhost:8000/api/v1/users/1/comments
+                          self: >-
+                            http://localhost:8000/api/v1/users/1/relationships/comments
+                    links:
+                      self: http://localhost:8000/api/v1/users/1
+  /v1/posts/{id}:
+    get:
+      tags:
+        - Posts
+      summary: Get post
+      description: This endpoint retrieves a specific model by its ID
+      security:
+        - noauthAuth: []
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: The ID of the post to be retrieved
+      responses:
+        '200':
+          description: OK
+          headers:
+            Host:
+              schema:
+                type: string
+                example: localhost:8000
+            Connection:
+              schema:
+                type: string
+                example: close
+            X-Powered-By:
+              schema:
+                type: string
+                example: PHP/8.3.1
+            Content-Type:
+              schema:
+                type: string
+                example: application/vnd.api+json
+            Cache-Control:
+              schema:
+                type: string
+                example: no-cache, private
+            Date:
+              schema:
+                type: string
+                example: Wed, 28 Feb 2024 17:13:34 GMT
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+                example: '60'
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+                example: '57'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                jsonapi:
+                  version: '1.0'
+                links:
+                  self: http://localhost:8000/api/v1/posts/5
+                data:
+                  type: posts
+                  id: '5'
+                  attributes:
+                    title: quis nobis totam sint corporis
+                    slug: qui-incidunt-laborum-hic-nulla-dolor-consectetur-quod
+                    content: >-
+                      Odio enim facere incidunt accusantium sint consequuntur.
+                      Dicta omnis quia quia omnis aut consectetur adipisci
+                      rerum. Accusantium repellendus dolor et mollitia et illo
+                      consequatur. Et pariatur voluptate molestias harum
+                      recusandae commodi omnis.
+                    published_at: '1989-07-06T06:21:34.000000Z'
+                    created_at: '2024-02-28T16:42:49.000000Z'
+                    updated_at: '2024-02-28T16:42:49.000000Z'
+                  relationships:
+                    author:
+                      links:
+                        related: http://localhost:8000/api/v1/posts/5/author
+                        self: >-
+                          http://localhost:8000/api/v1/posts/5/relationships/author
+                    comments:
+                      links:
+                        related: http://localhost:8000/api/v1/posts/5/comments
+                        self: >-
+                          http://localhost:8000/api/v1/posts/5/relationships/comments
+                      data:
+                        - type: comments
+                          id: '1'
+                    tags:
+                      links:
+                        related: http://localhost:8000/api/v1/posts/5/tags
+                        self: >-
+                          http://localhost:8000/api/v1/posts/5/relationships/tags
+                      data:
+                        - type: tags
+                          id: '1'
+                    categories:
+                      links:
+                        related: http://localhost:8000/api/v1/posts/5/categories
+                        self: >-
+                          http://localhost:8000/api/v1/posts/5/relationships/categories
+                  links:
+                    self: http://localhost:8000/api/v1/posts/5
+                included:
+                  - type: comments
+                    id: '1'
+                    attributes:
+                      content: >-
+                        Aut deleniti autem quo cumque hic incidunt. Corrupti id
+                        rerum aperiam. Ea tempora esse voluptates alias.
+                        Exercitationem perspiciatis eum maxime at.
+                      created_at: '2024-02-28T16:42:49.000000Z'
+                      updated_at: '2024-02-28T16:42:49.000000Z'
+                    relationships:
+                      user:
+                        links:
+                          related: http://localhost:8000/api/v1/comments/1/user
+                          self: >-
+                            http://localhost:8000/api/v1/comments/1/relationships/user
+                      post:
+                        links:
+                          related: http://localhost:8000/api/v1/comments/1/post
+                          self: >-
+                            http://localhost:8000/api/v1/comments/1/relationships/post
+                    links:
+                      self: http://localhost:8000/api/v1/comments/1
+                  - type: tags
+                    id: '1'
+                    attributes:
+                      name: Technology
+                      created_at: '2024-02-28T16:42:49.000000Z'
+                      updated_at: '2024-02-28T16:42:49.000000Z'
+                    relationships:
+                      posts:
+                        links:
+                          related: http://localhost:8000/api/v1/tags/1/posts
+                          self: >-
+                            http://localhost:8000/api/v1/tags/1/relationships/posts
+                    links:
+                      self: http://localhost:8000/api/v1/tags/1
+    patch:
+      tags:
+        - Posts
+      summary: Update post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                data:
+                  type: posts
+                  id: ''
+                  attributes:
+                    published_at: null
+                    title: ''
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: The ID of the post to be updated
+      responses:
+        '200':
+          description: OK
+          headers:
+            Host:
+              schema:
+                type: string
+                example: localhost:8000
+            Connection:
+              schema:
+                type: string
+                example: close
+            X-Powered-By:
+              schema:
+                type: string
+                example: PHP/8.3.1
+            Content-Type:
+              schema:
+                type: string
+                example: application/vnd.api+json
+            Cache-Control:
+              schema:
+                type: string
+                example: no-cache, private
+            Date:
+              schema:
+                type: string
+                example: Wed, 28 Feb 2024 17:45:53 GMT
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+                example: '60'
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+                example: '58'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                jsonapi:
+                  version: '1.0'
+                links:
+                  self: http://localhost:8000/api/v1/posts/4
+                data:
+                  type: posts
+                  id: '4'
+                  attributes:
+                    title: Updated title
+                    slug: impedit-non-fuga-nostrum-autem-accusamus
+                    content: >-
+                      Quasi et quis non. Quia et rerum expedita facilis beatae
+                      porro. Consequuntur et non et et repudiandae officia et
+                      accusamus.
+                    published_at: '2000-10-26T07:33:17.000000Z'
+                    created_at: '2024-02-28T16:42:49.000000Z'
+                    updated_at: '2024-02-28T17:45:53.000000Z'
+                  relationships:
+                    author:
+                      links:
+                        related: http://localhost:8000/api/v1/posts/4/author
+                        self: >-
+                          http://localhost:8000/api/v1/posts/4/relationships/author
+                    comments:
+                      links:
+                        related: http://localhost:8000/api/v1/posts/4/comments
+                        self: >-
+                          http://localhost:8000/api/v1/posts/4/relationships/comments
+                    tags:
+                      links:
+                        related: http://localhost:8000/api/v1/posts/4/tags
+                        self: >-
+                          http://localhost:8000/api/v1/posts/4/relationships/tags
+                      data: []
+                    categories:
+                      links:
+                        related: http://localhost:8000/api/v1/posts/4/categories
+                        self: >-
+                          http://localhost:8000/api/v1/posts/4/relationships/categories
+                  links:
+                    self: http://localhost:8000/api/v1/posts/4
+        '403':
+          description: Forbidden
+          headers:
+            Host:
+              schema:
+                type: string
+                example: localhost:8000
+            Connection:
+              schema:
+                type: string
+                example: close
+            X-Powered-By:
+              schema:
+                type: string
+                example: PHP/8.3.1
+            Content-Type:
+              schema:
+                type: string
+                example: application/vnd.api+json
+            Cache-Control:
+              schema:
+                type: string
+                example: no-cache, private
+            Date:
+              schema:
+                type: string
+                example: Wed, 28 Feb 2024 17:44:08 GMT
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+                example: '60'
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+                example: '57'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                jsonapi:
+                  version: '1.0'
+                errors:
+                  - detail: This action is unauthorized.
+                    status: '403'
+                    title: Forbidden
+        '422':
+          description: Unprocessable Content
+          headers:
+            Host:
+              schema:
+                type: string
+                example: localhost:8000
+            Connection:
+              schema:
+                type: string
+                example: close
+            X-Powered-By:
+              schema:
+                type: string
+                example: PHP/8.3.1
+            Content-Type:
+              schema:
+                type: string
+                example: application/vnd.api+json
+            Cache-Control:
+              schema:
+                type: string
+                example: no-cache, private
+            Date:
+              schema:
+                type: string
+                example: Wed, 28 Feb 2024 17:48:08 GMT
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+                example: '60'
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+                example: '58'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                jsonapi:
+                  version: '1.0'
+                errors:
+                  - detail: The title field is required.
+                    source:
+                      pointer: /data/attributes/title
+                    status: '422'
+                    title: Unprocessable Entity
+    delete:
+      tags:
+        - Posts
+      summary: Delete post
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: The ID of the post to be deleted
+      responses:
+        '204':
+          description: No Content
+          headers:
+            Host:
+              schema:
+                type: string
+                example: localhost:8000
+            Connection:
+              schema:
+                type: string
+                example: close
+            X-Powered-By:
+              schema:
+                type: string
+                example: PHP/8.3.1
+            Cache-Control:
+              schema:
+                type: string
+                example: no-cache, private
+            Date:
+              schema:
+                type: string
+                example: Wed, 28 Feb 2024 18:06:03 GMT
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+                example: '60'
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+                example: '59'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+          content:
+            text/plain:
+              schema:
+                type: string
+              example: null
+  /v1/posts/{id}/{relationship}:
+    get:
+      tags:
+        - Posts
+      summary: Get post relationship
+      description: This endpoint retrieves the relationship details of a specific model.
+      security:
+        - noauthAuth: []
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: The ID of the post to be retrieved
+        - name: relationship
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: OK
+          headers:
+            Host:
+              schema:
+                type: string
+                example: localhost:8000
+            Connection:
+              schema:
+                type: string
+                example: close
+            X-Powered-By:
+              schema:
+                type: string
+                example: PHP/8.3.1
+            Content-Type:
+              schema:
+                type: string
+                example: application/vnd.api+json
+            Cache-Control:
+              schema:
+                type: string
+                example: no-cache, private
+            Date:
+              schema:
+                type: string
+                example: Wed, 28 Feb 2024 18:02:26 GMT
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+                example: '60'
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+                example: '59'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                jsonapi:
+                  version: '1.0'
+                links:
+                  related: http://localhost:8000/api/v1/posts/130/comments
+                  self: >-
+                    http://localhost:8000/api/v1/posts/130/relationships/comments
+                data:
+                  - type: comments
+                    id: '11'
+                    attributes:
+                      content: >-
+                        Quo non velit enim eligendi fugit. Consequuntur quasi
+                        facilis nam explicabo facilis rerum. Et maiores in et
+                        aliquam voluptatem molestiae debitis. Omnis accusantium
+                        est aut facilis molestiae aut.
+                      created_at: '2024-02-28T16:42:49.000000Z'
+                      updated_at: '2024-02-28T16:42:49.000000Z'
+                    relationships:
+                      user:
+                        links:
+                          related: http://localhost:8000/api/v1/comments/11/user
+                          self: >-
+                            http://localhost:8000/api/v1/comments/11/relationships/user
+                      post:
+                        links:
+                          related: http://localhost:8000/api/v1/comments/11/post
+                          self: >-
+                            http://localhost:8000/api/v1/comments/11/relationships/post
+                    links:
+                      self: http://localhost:8000/api/v1/comments/11
+                  - type: comments
+                    id: '15'
+                    attributes:
+                      content: >-
+                        Et id cum qui non tenetur. Sit occaecati laboriosam et
+                        assumenda cum dolorem.
+                      created_at: '2024-02-28T16:42:49.000000Z'
+                      updated_at: '2024-02-28T16:42:49.000000Z'
+                    relationships:
+                      user:
+                        links:
+                          related: http://localhost:8000/api/v1/comments/15/user
+                          self: >-
+                            http://localhost:8000/api/v1/comments/15/relationships/user
+                      post:
+                        links:
+                          related: http://localhost:8000/api/v1/comments/15/post
+                          self: >-
+                            http://localhost:8000/api/v1/comments/15/relationships/post
+                    links:
+                      self: http://localhost:8000/api/v1/comments/15
+  /v1/posts/{id}/relationships/{relationship}:
+    patch:
+      tags:
+        - Posts
+      summary: Update post's relationship
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                data:
+                  - type: ''
+                    id: ''
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: The ID of the post to be updated
+        - name: relationship
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: OK
+          headers:
+            Host:
+              schema:
+                type: string
+                example: localhost:8000
+            Connection:
+              schema:
+                type: string
+                example: close
+            X-Powered-By:
+              schema:
+                type: string
+                example: PHP/8.3.1
+            Content-Type:
+              schema:
+                type: string
+                example: application/vnd.api+json
+            Cache-Control:
+              schema:
+                type: string
+                example: no-cache, private
+            Date:
+              schema:
+                type: string
+                example: Wed, 28 Feb 2024 17:54:03 GMT
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+                example: '60'
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+                example: '59'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                jsonapi:
+                  version: '1.0'
+                links:
+                  related: http://localhost:8000/api/v1/posts/4/tags
+                  self: http://localhost:8000/api/v1/posts/4/relationships/tags
+                data:
+                  - type: tags
+                    id: '2'
+    delete:
+      tags:
+        - Posts
+      summary: Delete post's relationship
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: The ID of the post to be updated
+        - name: relationship
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '204':
+          description: No Content
+          headers:
+            Host:
+              schema:
+                type: string
+                example: localhost:8000
+            Connection:
+              schema:
+                type: string
+                example: close
+            X-Powered-By:
+              schema:
+                type: string
+                example: PHP/8.3.1
+            Cache-Control:
+              schema:
+                type: string
+                example: no-cache, private
+            Date:
+              schema:
+                type: string
+                example: Wed, 28 Feb 2024 17:56:32 GMT
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+                example: '60'
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+                example: '58'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+          content:
+            text/plain:
+              schema:
+                type: string
+              example: null
+  /v1/tags:
+    get:
+      tags:
+        - Tags
+      summary: Get all tags
+      description: >-
+        This endpoint retrieves a list of all inscances from the specified
+        model.
+      security:
+        - noauthAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            Host:
+              schema:
+                type: string
+                example: localhost
+            Connection:
+              schema:
+                type: string
+                example: close
+            X-Powered-By:
+              schema:
+                type: string
+                example: PHP/8.3.3-1+ubuntu22.04.1+deb.sury.org+1
+            Content-Type:
+              schema:
+                type: string
+                example: application/vnd.api+json
+            Cache-Control:
+              schema:
+                type: string
+                example: no-cache, private
+            Date:
+              schema:
+                type: string
+                example: Wed, 28 Feb 2024 14:31:08 GMT
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+                example: '60'
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+                example: '58'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                jsonapi:
+                  version: '1.0'
+                data:
+                  - type: tags
+                    id: '1'
+                    attributes:
+                      name: Technology
+                      created_at: '2024-02-28T13:24:31.000000Z'
+                      updated_at: '2024-02-28T13:24:31.000000Z'
+                    relationships:
+                      posts:
+                        links:
+                          related: http://localhost/api/v1/tags/1/posts
+                          self: http://localhost/api/v1/tags/1/relationships/posts
+                    links:
+                      self: http://localhost/api/v1/tags/1
+                  - type: tags
+                    id: '2'
+                    attributes:
+                      name: Travel
+                      created_at: '2024-02-28T13:24:31.000000Z'
+                      updated_at: '2024-02-28T13:24:31.000000Z'
+                    relationships:
+                      posts:
+                        links:
+                          related: http://localhost/api/v1/tags/2/posts
+                          self: http://localhost/api/v1/tags/2/relationships/posts
+                    links:
+                      self: http://localhost/api/v1/tags/2
+    post:
+      tags:
+        - Tags
+      summary: Create new tag
+      description: >-
+        This endpoint allows you to create a new model with the specified
+        relationships.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                data:
+                  type: tags
+                  attributes:
+                    name: ''
+      responses:
+        '201':
+          description: Created
+          headers:
+            Host:
+              schema:
+                type: string
+                example: localhost:8000
+            Connection:
+              schema:
+                type: string
+                example: close
+            X-Powered-By:
+              schema:
+                type: string
+                example: PHP/8.3.1
+            Content-Type:
+              schema:
+                type: string
+                example: application/vnd.api+json
+            Location:
+              schema:
+                type: string
+                example: http://localhost:8000/api/v1/tags/6
+            Cache-Control:
+              schema:
+                type: string
+                example: no-cache, private
+            Date:
+              schema:
+                type: string
+                example: Wed, 28 Feb 2024 18:16:51 GMT
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+                example: '60'
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+                example: '59'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                jsonapi:
+                  version: '1.0'
+                links:
+                  self: http://localhost:8000/api/v1/tags/6
+                data:
+                  type: tags
+                  id: '6'
+                  attributes:
+                    name: New tag
+                    created_at: '2024-02-28T18:16:51.000000Z'
+                    updated_at: '2024-02-28T18:16:51.000000Z'
+                  relationships:
+                    posts:
+                      links:
+                        related: http://localhost:8000/api/v1/tags/6/posts
+                        self: >-
+                          http://localhost:8000/api/v1/tags/6/relationships/posts
+                  links:
+                    self: http://localhost:8000/api/v1/tags/6
+  /v1/tags/{id}:
+    get:
+      tags:
+        - Tags
+      summary: Get tag
+      description: This endpoint retrieves a specific model by its ID
+      security:
+        - noauthAuth: []
+      parameters:
+        - name: include
+          in: query
+          schema:
+            type: string
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: The ID of the tag to be retrieved
+      responses:
+        '200':
+          description: OK
+          headers:
+            Host:
+              schema:
+                type: string
+                example: localhost:8000
+            Connection:
+              schema:
+                type: string
+                example: close
+            X-Powered-By:
+              schema:
+                type: string
+                example: PHP/8.3.1
+            Content-Type:
+              schema:
+                type: string
+                example: application/vnd.api+json
+            Cache-Control:
+              schema:
+                type: string
+                example: no-cache, private
+            Date:
+              schema:
+                type: string
+                example: Wed, 28 Feb 2024 18:29:29 GMT
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+                example: '60'
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+                example: '57'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                jsonapi:
+                  version: '1.0'
+                links:
+                  self: http://localhost:8000/api/v1/tags/1
+                data:
+                  type: tags
+                  id: '1'
+                  attributes:
+                    name: Technology
+                    created_at: '2024-02-28T16:42:49.000000Z'
+                    updated_at: '2024-02-28T16:42:49.000000Z'
+                  relationships:
+                    posts:
+                      links:
+                        related: http://localhost:8000/api/v1/tags/1/posts
+                        self: >-
+                          http://localhost:8000/api/v1/tags/1/relationships/posts
+                      data:
+                        - type: posts
+                          id: '1'
+                        - type: posts
+                          id: '2'
+                  links:
+                    self: http://localhost:8000/api/v1/tags/1
+                included:
+                  - type: posts
+                    id: '1'
+                    attributes:
+                      title: esse ut iusto vel quia
+                      slug: consequuntur-voluptate-velit-et-nisi
+                      content: >-
+                        Culpa nemo rerum fugit est expedita cumque. Maiores
+                        voluptatum id ut voluptas. Et aperiam laudantium ut
+                        expedita. Maxime sint et commodi error nesciunt culpa a.
+                        Blanditiis minus eum voluptatem quibusdam aut deleniti.
+                      published_at: '2023-12-14T11:27:00.000000Z'
+                      created_at: '2024-02-28T16:42:49.000000Z'
+                      updated_at: '2024-02-28T16:42:49.000000Z'
+                    relationships:
+                      author:
+                        links:
+                          related: http://localhost:8000/api/v1/posts/1/author
+                          self: >-
+                            http://localhost:8000/api/v1/posts/1/relationships/author
+                      comments:
+                        links:
+                          related: http://localhost:8000/api/v1/posts/1/comments
+                          self: >-
+                            http://localhost:8000/api/v1/posts/1/relationships/comments
+                      tags:
+                        links:
+                          related: http://localhost:8000/api/v1/posts/1/tags
+                          self: >-
+                            http://localhost:8000/api/v1/posts/1/relationships/tags
+                      categories:
+                        links:
+                          related: http://localhost:8000/api/v1/posts/1/categories
+                          self: >-
+                            http://localhost:8000/api/v1/posts/1/relationships/categories
+                    links:
+                      self: http://localhost:8000/api/v1/posts/1
+                  - type: posts
+                    id: '2'
+                    attributes:
+                      title: repellendus possimus magnam corrupti veniam
+                      slug: explicabo-dolor-sed-quibusdam-eos-eaque-asperiores
+                      content: >-
+                        Animi et recusandae autem sed hic animi. Ullam voluptas
+                        exercitationem sit ipsam fugiat fuga. Neque nihil
+                        molestiae facilis at voluptas neque. Rerum eaque
+                        officiis voluptas beatae ducimus.
+                      published_at: '2007-06-01T15:18:59.000000Z'
+                      created_at: '2024-02-28T16:42:49.000000Z'
+                      updated_at: '2024-02-28T16:42:49.000000Z'
+                    relationships:
+                      author:
+                        links:
+                          related: http://localhost:8000/api/v1/posts/2/author
+                          self: >-
+                            http://localhost:8000/api/v1/posts/2/relationships/author
+                      comments:
+                        links:
+                          related: http://localhost:8000/api/v1/posts/2/comments
+                          self: >-
+                            http://localhost:8000/api/v1/posts/2/relationships/comments
+                      tags:
+                        links:
+                          related: http://localhost:8000/api/v1/posts/2/tags
+                          self: >-
+                            http://localhost:8000/api/v1/posts/2/relationships/tags
+                      categories:
+                        links:
+                          related: http://localhost:8000/api/v1/posts/2/categories
+                          self: >-
+                            http://localhost:8000/api/v1/posts/2/relationships/categories
+                    links:
+                      self: http://localhost:8000/api/v1/posts/2
+    patch:
+      tags:
+        - Tags
+      summary: Update tag
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                data:
+                  type: tags
+                  id: ''
+                  attributes:
+                    name: ''
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: The ID of the tag to be updated
+      responses:
+        '200':
+          description: OK
+          headers:
+            Host:
+              schema:
+                type: string
+                example: localhost:8000
+            Connection:
+              schema:
+                type: string
+                example: close
+            X-Powered-By:
+              schema:
+                type: string
+                example: PHP/8.3.1
+            Content-Type:
+              schema:
+                type: string
+                example: application/vnd.api+json
+            Cache-Control:
+              schema:
+                type: string
+                example: no-cache, private
+            Date:
+              schema:
+                type: string
+                example: Wed, 28 Feb 2024 18:22:15 GMT
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+                example: '60'
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+                example: '59'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                jsonapi:
+                  version: '1.0'
+                links:
+                  self: http://localhost:8000/api/v1/tags/7
+                data:
+                  type: tags
+                  id: '7'
+                  attributes:
+                    name: Updated name
+                    created_at: '2024-02-28T18:21:13.000000Z'
+                    updated_at: '2024-02-28T18:22:15.000000Z'
+                  relationships:
+                    posts:
+                      links:
+                        related: http://localhost:8000/api/v1/tags/7/posts
+                        self: >-
+                          http://localhost:8000/api/v1/tags/7/relationships/posts
+                  links:
+                    self: http://localhost:8000/api/v1/tags/7
+    delete:
+      tags:
+        - Tags
+      summary: Delete tag
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: The ID of the tag to be deleted
+      responses:
+        '204':
+          description: No Content
+          headers:
+            Host:
+              schema:
+                type: string
+                example: localhost:8000
+            Connection:
+              schema:
+                type: string
+                example: close
+            X-Powered-By:
+              schema:
+                type: string
+                example: PHP/8.3.1
+            Cache-Control:
+              schema:
+                type: string
+                example: no-cache, private
+            Date:
+              schema:
+                type: string
+                example: Wed, 28 Feb 2024 18:20:47 GMT
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+                example: '60'
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+                example: '59'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+          content:
+            text/plain:
+              schema:
+                type: string
+              example: null
+  /v1/tags/{id}/{relationship}:
+    get:
+      tags:
+        - Tags
+      summary: Get tag relationship
+      description: This endpoint retrieves the relationship details of a specific model.
+      security:
+        - noauthAuth: []
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: The ID of the tag to be retrieved
+        - name: relationship
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: OK
+          headers:
+            Host:
+              schema:
+                type: string
+                example: localhost:8000
+            Connection:
+              schema:
+                type: string
+                example: close
+            X-Powered-By:
+              schema:
+                type: string
+                example: PHP/8.3.1
+            Content-Type:
+              schema:
+                type: string
+                example: application/vnd.api+json
+            Cache-Control:
+              schema:
+                type: string
+                example: no-cache, private
+            Date:
+              schema:
+                type: string
+                example: Wed, 28 Feb 2024 18:36:24 GMT
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+                example: '60'
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+                example: '59'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                meta:
+                  page:
+                    currentPage: 1
+                    from: 1
+                    lastPage: 5
+                    perPage: 15
+                    to: 15
+                    total: 66
+                jsonapi:
+                  version: '1.0'
+                links:
+                  first: >-
+                    http://localhost:8000/api/v1/tags/3/posts?page%5Blimit%5D=15&page%5Bpage%5D=1
+                  last: >-
+                    http://localhost:8000/api/v1/tags/3/posts?page%5Blimit%5D=15&page%5Bpage%5D=5
+                  next: >-
+                    http://localhost:8000/api/v1/tags/3/posts?page%5Blimit%5D=15&page%5Bpage%5D=2
+                  related: http://localhost:8000/api/v1/tags/3/posts
+                  self: http://localhost:8000/api/v1/tags/3/relationships/posts
+                data:
+                  - type: posts
+                    id: '1'
+                    attributes:
+                      title: esse ut iusto vel quia
+                      slug: consequuntur-voluptate-velit-et-nisi
+                      content: >-
+                        Culpa nemo rerum fugit est expedita cumque. Maiores
+                        voluptatum id ut voluptas. Et aperiam laudantium ut
+                        expedita. Maxime sint et commodi error nesciunt culpa a.
+                        Blanditiis minus eum voluptatem quibusdam aut deleniti.
+                      published_at: '2023-12-14T11:27:00.000000Z'
+                      created_at: '2024-02-28T16:42:49.000000Z'
+                      updated_at: '2024-02-28T16:42:49.000000Z'
+                    relationships:
+                      author:
+                        links:
+                          related: http://localhost:8000/api/v1/posts/1/author
+                          self: >-
+                            http://localhost:8000/api/v1/posts/1/relationships/author
+                      comments:
+                        links:
+                          related: http://localhost:8000/api/v1/posts/1/comments
+                          self: >-
+                            http://localhost:8000/api/v1/posts/1/relationships/comments
+                      tags:
+                        links:
+                          related: http://localhost:8000/api/v1/posts/1/tags
+                          self: >-
+                            http://localhost:8000/api/v1/posts/1/relationships/tags
+                      categories:
+                        links:
+                          related: http://localhost:8000/api/v1/posts/1/categories
+                          self: >-
+                            http://localhost:8000/api/v1/posts/1/relationships/categories
+                    links:
+                      self: http://localhost:8000/api/v1/posts/1
+                  - type: posts
+                    id: '2'
+                    attributes:
+                      title: repellendus possimus magnam corrupti veniam
+                      slug: explicabo-dolor-sed-quibusdam-eos-eaque-asperiores
+                      content: >-
+                        Animi et recusandae autem sed hic animi. Ullam voluptas
+                        exercitationem sit ipsam fugiat fuga. Neque nihil
+                        molestiae facilis at voluptas neque. Rerum eaque
+                        officiis voluptas beatae ducimus.
+                      published_at: '2007-06-01T15:18:59.000000Z'
+                      created_at: '2024-02-28T16:42:49.000000Z'
+                      updated_at: '2024-02-28T16:42:49.000000Z'
+                    relationships:
+                      author:
+                        links:
+                          related: http://localhost:8000/api/v1/posts/2/author
+                          self: >-
+                            http://localhost:8000/api/v1/posts/2/relationships/author
+                      comments:
+                        links:
+                          related: http://localhost:8000/api/v1/posts/2/comments
+                          self: >-
+                            http://localhost:8000/api/v1/posts/2/relationships/comments
+                      tags:
+                        links:
+                          related: http://localhost:8000/api/v1/posts/2/tags
+                          self: >-
+                            http://localhost:8000/api/v1/posts/2/relationships/tags
+                      categories:
+                        links:
+                          related: http://localhost:8000/api/v1/posts/2/categories
+                          self: >-
+                            http://localhost:8000/api/v1/posts/2/relationships/categories
+                    links:
+                      self: http://localhost:8000/api/v1/posts/2
+        '404':
+          description: Not Found
+          headers:
+            Host:
+              schema:
+                type: string
+                example: localhost:8000
+            Connection:
+              schema:
+                type: string
+                example: close
+            X-Powered-By:
+              schema:
+                type: string
+                example: PHP/8.3.1
+            Content-Type:
+              schema:
+                type: string
+                example: application/vnd.api+json
+            Cache-Control:
+              schema:
+                type: string
+                example: no-cache, private
+            Date:
+              schema:
+                type: string
+                example: Wed, 28 Feb 2024 17:20:47 GMT
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+                example: '60'
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+                example: '57'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                jsonapi:
+                  version: '1.0'
+                errors:
+                  - status: '404'
+                    title: Not Found
+  /v1/categories:
+    get:
+      tags:
+        - Categories
+      summary: Get all categories
+      description: >-
+        This endpoint retrieves a list of all inscances from the specified
+        model.
+      security:
+        - noauthAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            Host:
+              schema:
+                type: string
+                example: localhost
+            Connection:
+              schema:
+                type: string
+                example: close
+            X-Powered-By:
+              schema:
+                type: string
+                example: PHP/8.3.3-1+ubuntu22.04.1+deb.sury.org+1
+            Content-Type:
+              schema:
+                type: string
+                example: application/vnd.api+json
+            Cache-Control:
+              schema:
+                type: string
+                example: no-cache, private
+            Date:
+              schema:
+                type: string
+                example: Wed, 28 Feb 2024 14:31:19 GMT
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+                example: '60'
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+                example: '57'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                jsonapi:
+                  version: '1.0'
+                data:
+                  - type: categories
+                    id: '1'
+                    attributes:
+                      name: Web Development
+                      created_at: '2024-02-28T13:24:31.000000Z'
+                      updated_at: '2024-02-28T13:24:31.000000Z'
+                    relationships:
+                      posts:
+                        links:
+                          related: http://localhost/api/v1/categories/1/posts
+                          self: >-
+                            http://localhost/api/v1/categories/1/relationships/posts
+                    links:
+                      self: http://localhost/api/v1/categories/1
+                  - type: categories
+                    id: '2'
+                    attributes:
+                      name: Adventure
+                      created_at: '2024-02-28T13:24:31.000000Z'
+                      updated_at: '2024-02-28T13:24:31.000000Z'
+                    relationships:
+                      posts:
+                        links:
+                          related: http://localhost/api/v1/categories/2/posts
+                          self: >-
+                            http://localhost/api/v1/categories/2/relationships/posts
+                    links:
+                      self: http://localhost/api/v1/categories/2
+    post:
+      tags:
+        - Categories
+      summary: Create new category
+      description: >-
+        This endpoint allows you to create a new model with the specified
+        relationships.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                data:
+                  type: categories
+                  attributes:
+                    name: ''
+      responses:
+        '201':
+          description: Created
+          headers:
+            Host:
+              schema:
+                type: string
+                example: localhost:8000
+            Connection:
+              schema:
+                type: string
+                example: close
+            X-Powered-By:
+              schema:
+                type: string
+                example: PHP/8.3.1
+            Content-Type:
+              schema:
+                type: string
+                example: application/vnd.api+json
+            Location:
+              schema:
+                type: string
+                example: http://localhost:8000/api/v1/categories/4
+            Cache-Control:
+              schema:
+                type: string
+                example: no-cache, private
+            Date:
+              schema:
+                type: string
+                example: Wed, 28 Feb 2024 18:42:06 GMT
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+                example: '60'
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+                example: '59'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                jsonapi:
+                  version: '1.0'
+                links:
+                  self: http://localhost:8000/api/v1/categories/4
+                data:
+                  type: categories
+                  id: '4'
+                  attributes:
+                    name: New category
+                    created_at: '2024-02-28T18:42:06.000000Z'
+                    updated_at: '2024-02-28T18:42:06.000000Z'
+                  relationships:
+                    posts:
+                      links:
+                        related: http://localhost:8000/api/v1/categories/4/posts
+                        self: >-
+                          http://localhost:8000/api/v1/categories/4/relationships/posts
+                  links:
+                    self: http://localhost:8000/api/v1/categories/4
+  /v1/categories/{id}:
+    get:
+      tags:
+        - Categories
+      summary: Get category
+      description: This endpoint retrieves a specific model by its ID
+      security:
+        - noauthAuth: []
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: The ID of the category to be retrieved
+      responses:
+        '200':
+          description: OK
+          headers:
+            Host:
+              schema:
+                type: string
+                example: localhost:8000
+            Connection:
+              schema:
+                type: string
+                example: close
+            X-Powered-By:
+              schema:
+                type: string
+                example: PHP/8.3.1
+            Content-Type:
+              schema:
+                type: string
+                example: application/vnd.api+json
+            Cache-Control:
+              schema:
+                type: string
+                example: no-cache, private
+            Date:
+              schema:
+                type: string
+                example: Wed, 28 Feb 2024 18:34:44 GMT
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+                example: '60'
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+                example: '59'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                jsonapi:
+                  version: '1.0'
+                links:
+                  self: http://localhost:8000/api/v1/categories/1
+                data:
+                  type: categories
+                  id: '1'
+                  attributes:
+                    name: Web Development
+                    created_at: '2024-02-28T16:42:49.000000Z'
+                    updated_at: '2024-02-28T16:42:49.000000Z'
+                  relationships:
+                    posts:
+                      links:
+                        related: http://localhost:8000/api/v1/categories/1/posts
+                        self: >-
+                          http://localhost:8000/api/v1/categories/1/relationships/posts
+                  links:
+                    self: http://localhost:8000/api/v1/categories/1
+    patch:
+      tags:
+        - Categories
+      summary: Update category
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                data:
+                  type: categories
+                  id: ''
+                  attributes:
+                    name: ''
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: The ID of the category to be updated
+      responses:
+        '200':
+          description: OK
+          headers:
+            Host:
+              schema:
+                type: string
+                example: localhost:8000
+            Connection:
+              schema:
+                type: string
+                example: close
+            X-Powered-By:
+              schema:
+                type: string
+                example: PHP/8.3.1
+            Content-Type:
+              schema:
+                type: string
+                example: application/vnd.api+json
+            Cache-Control:
+              schema:
+                type: string
+                example: no-cache, private
+            Date:
+              schema:
+                type: string
+                example: Wed, 28 Feb 2024 18:43:37 GMT
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+                example: '60'
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+                example: '59'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                jsonapi:
+                  version: '1.0'
+                links:
+                  self: http://localhost:8000/api/v1/categories/4
+                data:
+                  type: categories
+                  id: '4'
+                  attributes:
+                    name: Updated name
+                    created_at: '2024-02-28T18:42:06.000000Z'
+                    updated_at: '2024-02-28T18:43:37.000000Z'
+                  relationships:
+                    posts:
+                      links:
+                        related: http://localhost:8000/api/v1/categories/4/posts
+                        self: >-
+                          http://localhost:8000/api/v1/categories/4/relationships/posts
+                  links:
+                    self: http://localhost:8000/api/v1/categories/4
+    delete:
+      tags:
+        - Categories
+      summary: Delete category
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: The ID of the category to be deleted
+      responses:
+        '204':
+          description: No Content
+          headers:
+            Host:
+              schema:
+                type: string
+                example: localhost:8000
+            Connection:
+              schema:
+                type: string
+                example: close
+            X-Powered-By:
+              schema:
+                type: string
+                example: PHP/8.3.1
+            Cache-Control:
+              schema:
+                type: string
+                example: no-cache, private
+            Date:
+              schema:
+                type: string
+                example: Wed, 28 Feb 2024 18:44:11 GMT
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+                example: '60'
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+                example: '58'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+          content:
+            text/plain:
+              schema:
+                type: string
+              example: null
+  /v1/categories/{id}/{relationship}:
+    get:
+      tags:
+        - Categories
+      summary: Get category relationship
+      description: This endpoint retrieves the relationship details of a specific model.
+      security:
+        - noauthAuth: []
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: The ID of the category to be retrieved
+        - name: relationship
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: OK
+          headers:
+            Host:
+              schema:
+                type: string
+                example: localhost:8000
+            Connection:
+              schema:
+                type: string
+                example: close
+            X-Powered-By:
+              schema:
+                type: string
+                example: PHP/8.3.1
+            Content-Type:
+              schema:
+                type: string
+                example: application/vnd.api+json
+            Cache-Control:
+              schema:
+                type: string
+                example: no-cache, private
+            Date:
+              schema:
+                type: string
+                example: Wed, 28 Feb 2024 18:40:59 GMT
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+                example: '60'
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+                example: '59'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                jsonapi:
+                  version: '1.0'
+                links:
+                  related: http://localhost:8000/api/v1/categories/1/posts
+                  self: >-
+                    http://localhost:8000/api/v1/categories/1/relationships/posts
+                data:
+                  - type: posts
+                    id: '1'
+                    attributes:
+                      title: esse ut iusto vel quia
+                      slug: consequuntur-voluptate-velit-et-nisi
+                      content: >-
+                        Culpa nemo rerum fugit est expedita cumque. Maiores
+                        voluptatum id ut voluptas. Et aperiam laudantium ut
+                        expedita. Maxime sint et commodi error nesciunt culpa a.
+                        Blanditiis minus eum voluptatem quibusdam aut deleniti.
+                      published_at: '2023-12-14T11:27:00.000000Z'
+                      created_at: '2024-02-28T16:42:49.000000Z'
+                      updated_at: '2024-02-28T16:42:49.000000Z'
+                    relationships:
+                      author:
+                        links:
+                          related: http://localhost:8000/api/v1/posts/1/author
+                          self: >-
+                            http://localhost:8000/api/v1/posts/1/relationships/author
+                      comments:
+                        links:
+                          related: http://localhost:8000/api/v1/posts/1/comments
+                          self: >-
+                            http://localhost:8000/api/v1/posts/1/relationships/comments
+                      tags:
+                        links:
+                          related: http://localhost:8000/api/v1/posts/1/tags
+                          self: >-
+                            http://localhost:8000/api/v1/posts/1/relationships/tags
+                      categories:
+                        links:
+                          related: http://localhost:8000/api/v1/posts/1/categories
+                          self: >-
+                            http://localhost:8000/api/v1/posts/1/relationships/categories
+                    links:
+                      self: http://localhost:8000/api/v1/posts/1
+                  - type: posts
+                    id: '3'
+                    attributes:
+                      title: est voluptatem iusto cum ratione
+                      slug: tempora-et-consequatur-repellendus-et
+                      content: >-
+                        Nisi et recusandae ea vel quaerat. Voluptatum et quis
+                        ratione. Repellat et minima corporis voluptas aperiam
+                        debitis est.
+                      published_at: null
+                      created_at: '2024-02-28T16:42:49.000000Z'
+                      updated_at: '2024-02-28T16:42:49.000000Z'
+                    relationships:
+                      author:
+                        links:
+                          related: http://localhost:8000/api/v1/posts/3/author
+                          self: >-
+                            http://localhost:8000/api/v1/posts/3/relationships/author
+                      comments:
+                        links:
+                          related: http://localhost:8000/api/v1/posts/3/comments
+                          self: >-
+                            http://localhost:8000/api/v1/posts/3/relationships/comments
+                      tags:
+                        links:
+                          related: http://localhost:8000/api/v1/posts/3/tags
+                          self: >-
+                            http://localhost:8000/api/v1/posts/3/relationships/tags
+                      categories:
+                        links:
+                          related: http://localhost:8000/api/v1/posts/3/categories
+                          self: >-
+                            http://localhost:8000/api/v1/posts/3/relationships/categories
+                    links:
+                      self: http://localhost:8000/api/v1/posts/3
+  /v1/comments:
+    get:
+      tags:
+        - Comments
+      summary: Get all comments
+      description: >-
+        This endpoint retrieves a list of all inscances from the specified
+        model.
+      security:
+        - noauthAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            Host:
+              schema:
+                type: string
+                example: localhost
+            Connection:
+              schema:
+                type: string
+                example: close
+            X-Powered-By:
+              schema:
+                type: string
+                example: PHP/8.3.3-1+ubuntu22.04.1+deb.sury.org+1
+            Content-Type:
+              schema:
+                type: string
+                example: application/vnd.api+json
+            Cache-Control:
+              schema:
+                type: string
+                example: no-cache, private
+            Date:
+              schema:
+                type: string
+                example: Wed, 28 Feb 2024 14:19:54 GMT
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+                example: '60'
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+                example: '59'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                jsonapi:
+                  version: '1.0'
+                data:
+                  - type: comments
+                    id: '1'
+                    attributes:
+                      content: >-
+                        Assumenda beatae quidem qui enim qui iste suscipit.
+                        Optio numquam sit quisquam harum. Consequatur omnis
+                        officiis esse. Temporibus consequuntur quia eveniet.
+                      created_at: '2024-02-28T13:24:32.000000Z'
+                      updated_at: '2024-02-28T13:24:32.000000Z'
+                    relationships:
+                      user:
+                        links:
+                          related: http://localhost/api/v1/comments/1/user
+                          self: >-
+                            http://localhost/api/v1/comments/1/relationships/user
+                      post:
+                        links:
+                          related: http://localhost/api/v1/comments/1/post
+                          self: >-
+                            http://localhost/api/v1/comments/1/relationships/post
+                    links:
+                      self: http://localhost/api/v1/comments/1
+                  - type: comments
+                    id: '2'
+                    attributes:
+                      content: >-
+                        Dolor voluptates necessitatibus voluptatem reprehenderit
+                        perspiciatis distinctio fugiat. Laboriosam odio et quo
+                        non.
+                      created_at: '2024-02-28T13:24:32.000000Z'
+                      updated_at: '2024-02-28T13:24:32.000000Z'
+                    relationships:
+                      user:
+                        links:
+                          related: http://localhost/api/v1/comments/2/user
+                          self: >-
+                            http://localhost/api/v1/comments/2/relationships/user
+                      post:
+                        links:
+                          related: http://localhost/api/v1/comments/2/post
+                          self: >-
+                            http://localhost/api/v1/comments/2/relationships/post
+                    links:
+                      self: http://localhost/api/v1/comments/2
+    post:
+      tags:
+        - Comments
+      summary: Create new comment
+      description: >-
+        This endpoint allows you to create a new model with the specified
+        relationships.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                data:
+                  type: comments
+                  attributes:
+                    content: ''
+                  relationships:
+                    post:
+                      data:
+                        - type: posts
+                          id: ''
+  /v1/comments/{id}:
+    get:
+      tags:
+        - Comments
+      summary: Get comment
+      description: This endpoint retrieves a specific model by its ID
+      security:
+        - noauthAuth: []
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: The ID of the comment to be retrieved
+      responses:
+        '200':
+          description: OK
+          headers:
+            Host:
+              schema:
+                type: string
+                example: localhost:8000
+            Connection:
+              schema:
+                type: string
+                example: close
+            X-Powered-By:
+              schema:
+                type: string
+                example: PHP/8.3.1
+            Content-Type:
+              schema:
+                type: string
+                example: application/vnd.api+json
+            Cache-Control:
+              schema:
+                type: string
+                example: no-cache, private
+            Date:
+              schema:
+                type: string
+                example: Wed, 28 Feb 2024 18:48:12 GMT
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+                example: '60'
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+                example: '59'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                jsonapi:
+                  version: '1.0'
+                links:
+                  self: http://localhost:8000/api/v1/comments/1
+                data:
+                  type: comments
+                  id: '1'
+                  attributes:
+                    content: >-
+                      Aut deleniti autem quo cumque hic incidunt. Corrupti id
+                      rerum aperiam. Ea tempora esse voluptates alias.
+                      Exercitationem perspiciatis eum maxime at.
+                    created_at: '2024-02-28T16:42:49.000000Z'
+                    updated_at: '2024-02-28T16:42:49.000000Z'
+                  relationships:
+                    user:
+                      links:
+                        related: http://localhost:8000/api/v1/comments/1/user
+                        self: >-
+                          http://localhost:8000/api/v1/comments/1/relationships/user
+                    post:
+                      links:
+                        related: http://localhost:8000/api/v1/comments/1/post
+                        self: >-
+                          http://localhost:8000/api/v1/comments/1/relationships/post
+                  links:
+                    self: http://localhost:8000/api/v1/comments/1
+    patch:
+      tags:
+        - Comments
+      summary: Update comment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                data:
+                  type: categories
+                  id: ''
+                  attributes:
+                    name: ''
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: The ID of the comment to be updated
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    delete:
+      tags:
+        - Comments
+      summary: Delete comment
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: The ID of the comment to be deleted
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1/comments/{id}/{relationship}:
+    get:
+      tags:
+        - Comments
+      summary: Get comments relationship
+      description: This endpoint retrieves the relationship details of a specific model.
+      security:
+        - noauthAuth: []
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: The ID of the comment to be retrieved
+        - name: relationship
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: OK
+          headers:
+            Host:
+              schema:
+                type: string
+                example: localhost:8000
+            Connection:
+              schema:
+                type: string
+                example: close
+            X-Powered-By:
+              schema:
+                type: string
+                example: PHP/8.3.1
+            Content-Type:
+              schema:
+                type: string
+                example: application/vnd.api+json
+            Cache-Control:
+              schema:
+                type: string
+                example: no-cache, private
+            Date:
+              schema:
+                type: string
+                example: Wed, 28 Feb 2024 18:48:44 GMT
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+                example: '60'
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+                example: '58'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                jsonapi:
+                  version: '1.0'
+                links:
+                  related: http://localhost:8000/api/v1/comments/1/user
+                  self: http://localhost:8000/api/v1/comments/1/relationships/user
+                data:
+                  type: users
+                  id: '13'
+                  attributes:
+                    name: Prof. Joanie Pfannerstill
+                    email: bud.kozey@example.net
+                    email_verified_at: '2024-02-28T16:42:49.000000Z'
+                    created_at: '2024-02-28T16:42:49.000000Z'
+                    updated_at: '2024-02-28T16:42:49.000000Z'
+                  relationships:
+                    posts:
+                      links:
+                        related: http://localhost:8000/api/v1/users/13/posts
+                        self: >-
+                          http://localhost:8000/api/v1/users/13/relationships/posts
+                    comments:
+                      links:
+                        related: http://localhost:8000/api/v1/users/13/comments
+                        self: >-
+                          http://localhost:8000/api/v1/users/13/relationships/comments
+                  links:
+                    self: http://localhost:8000/api/v1/users/13
+  /v1/users:
+    get:
+      tags:
+        - Users
+      summary: Get all users
+      description: >-
+        This endpoint retrieves a list of all inscances from the specified
+        model.
+      security:
+        - noauthAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            Host:
+              schema:
+                type: string
+                example: localhost:8000
+            Connection:
+              schema:
+                type: string
+                example: close
+            X-Powered-By:
+              schema:
+                type: string
+                example: PHP/8.3.1
+            Content-Type:
+              schema:
+                type: string
+                example: application/vnd.api+json
+            Cache-Control:
+              schema:
+                type: string
+                example: no-cache, private
+            Date:
+              schema:
+                type: string
+                example: Wed, 28 Feb 2024 19:26:33 GMT
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+                example: '60'
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+                example: '59'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                jsonapi:
+                  version: '1.0'
+                data:
+                  - type: users
+                    id: '1'
+                    attributes:
+                      name: Lizeth Roob
+                      email: sawayn.pearl@example.org
+                      registered_at: '2024-02-28T16:42:49.000000Z'
+                    relationships:
+                      posts:
+                        links:
+                          related: http://localhost:8000/api/v1/users/1/posts
+                          self: >-
+                            http://localhost:8000/api/v1/users/1/relationships/posts
+                      comments:
+                        links:
+                          related: http://localhost:8000/api/v1/users/1/comments
+                          self: >-
+                            http://localhost:8000/api/v1/users/1/relationships/comments
+                    links:
+                      self: http://localhost:8000/api/v1/users/1
+                  - type: users
+                    id: '2'
+                    attributes:
+                      name: Keshaun Frami MD
+                      email: weissnat.adella@example.net
+                      registered_at: '2024-02-28T16:42:49.000000Z'
+                    relationships:
+                      posts:
+                        links:
+                          related: http://localhost:8000/api/v1/users/2/posts
+                          self: >-
+                            http://localhost:8000/api/v1/users/2/relationships/posts
+                      comments:
+                        links:
+                          related: http://localhost:8000/api/v1/users/2/comments
+                          self: >-
+                            http://localhost:8000/api/v1/users/2/relationships/comments
+                    links:
+                      self: http://localhost:8000/api/v1/users/2
+  /v1/users/{id}:
+    get:
+      tags:
+        - Users
+      summary: Get user
+      description: This endpoint retrieves a specific model by its ID
+      security:
+        - noauthAuth: []
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: The ID of the user to be retrieved
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
