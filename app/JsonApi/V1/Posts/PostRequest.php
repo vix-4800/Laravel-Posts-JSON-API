@@ -25,7 +25,7 @@ class PostRequest extends ResourceRequest
             'slug' => ['required', 'string', $uniqueSlug],
             'content' => ['required', 'string'],
             'tags' => JsonApiRule::toMany(),
-            'publishedAt' => ['nullable', JsonApiRule::dateTime()],
+            'published_at' => ['nullable', JsonApiRule::dateTime()],
         ];
     }
 }
