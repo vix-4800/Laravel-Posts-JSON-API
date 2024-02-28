@@ -46,4 +46,10 @@ JsonApiRoute::server('v1')->prefix('v1')->resources(function (ResourceRegistrar 
             $relations->hasOne('user')->readOnly();
             $relations->hasOne('post')->readOnly();
         });
+
+    $server->resource('users', JsonApiController::class)
+        ->relationships(function (Relationships $relations) {
+            $relations->hasOne('posts');
+            $relations->hasOne('comments');
+        });
 });
