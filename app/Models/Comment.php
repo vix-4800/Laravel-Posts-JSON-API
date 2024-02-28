@@ -39,6 +39,8 @@ class Comment extends Model
      * @var string[]
      */
     protected $fillable = [
+        'user_id',
+        'post_id',
         'content',
     ];
 
