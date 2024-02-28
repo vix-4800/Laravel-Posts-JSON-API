@@ -4,7 +4,6 @@ namespace App\Policies;
 
 use App\Models\Tag;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 
 class TagPolicy
 {
@@ -40,24 +39,9 @@ class TagPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Tag $tag): bool
+    public function update(?User $user, Tag $tag): bool
     {
-        return Auth::check();
-    }
-
-    public function updatePosts(User $user, Tag $tag): bool
-    {
-        return $this->update($user, $tag);
-    }
-
-    public function attachPosts(User $user, Tag $tag): bool
-    {
-        return $this->update($user, $tag);
-    }
-
-    public function detachPosts(User $user, Tag $tag): bool
-    {
-        return $this->update($user, $tag);
+        return true;
     }
 
     /**

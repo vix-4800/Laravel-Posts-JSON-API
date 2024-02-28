@@ -29,7 +29,7 @@ class TagSchema extends Schema
 
             Str::make('name'),
 
-            BelongsToMany::make('posts'),
+            BelongsToMany::make('posts')->readOnly(),
 
             DateTime::make('created_at')->sortable()->readOnly(),
             DateTime::make('updated_at')->sortable()->readOnly(),

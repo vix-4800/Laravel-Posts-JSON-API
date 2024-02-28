@@ -50,11 +50,11 @@ class Post extends Model
      * @var string[]
      */
     protected $fillable = [
+        'author_id',
+        'title',
+        'slug',
         'content',
         'published_at',
-        'slug',
-        'title',
-        'author_id',
     ];
 
     /**

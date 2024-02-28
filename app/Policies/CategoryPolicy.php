@@ -4,7 +4,6 @@ namespace App\Policies;
 
 use App\Models\Category;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 
 class CategoryPolicy
 {
@@ -42,22 +41,7 @@ class CategoryPolicy
      */
     public function update(User $user, Category $category): bool
     {
-        return Auth::check();
-    }
-
-    public function updatePosts(User $user, Category $category): bool
-    {
-        return $this->update($user, $category);
-    }
-
-    public function attachPosts(User $user, Category $category): bool
-    {
-        return $this->update($user, $category);
-    }
-
-    public function detachPosts(User $user, Category $category): bool
-    {
-        return $this->update($user, $category);
+        return true;
     }
 
     /**

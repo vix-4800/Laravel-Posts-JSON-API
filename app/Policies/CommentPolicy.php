@@ -4,7 +4,6 @@ namespace App\Policies;
 
 use App\Models\Comment;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 
 class CommentPolicy
 {
@@ -39,7 +38,7 @@ class CommentPolicy
      */
     public function create(User $user): bool
     {
-        return Auth::check();
+        return true;
     }
 
     /**
