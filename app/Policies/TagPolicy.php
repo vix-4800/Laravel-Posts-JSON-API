@@ -4,26 +4,27 @@ namespace App\Policies;
 
 use App\Models\Tag;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class TagPolicy
 {
     /**
      * Determine whether the user can view any models.
      */
-    public function viewAny(User $user): bool
+    public function viewAny(?User $user): bool
     {
-        //
+        return true;
     }
 
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Tag $tag): bool
+    public function view(?User $user, Tag $tag): bool
     {
         return true;
     }
 
-    public function viewPosts(User $user, Tag $tag): bool
+    public function viewPosts(?User $user, Tag $tag): bool
     {
         return $this->view($user, $tag);
     }
@@ -33,7 +34,7 @@ class TagPolicy
      */
     public function create(User $user): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -41,7 +42,22 @@ class TagPolicy
      */
     public function update(User $user, Tag $tag): bool
     {
-        //
+        return Auth::check();
+    }
+
+    public function updatePosts(User $user, Tag $tag): bool
+    {
+        return $this->update($user, $tag);
+    }
+
+    public function attachPosts(User $user, Tag $tag): bool
+    {
+        return $this->update($user, $tag);
+    }
+
+    public function detachPosts(User $user, Tag $tag): bool
+    {
+        return $this->update($user, $tag);
     }
 
     /**
@@ -49,22 +65,6 @@ class TagPolicy
      */
     public function delete(User $user, Tag $tag): bool
     {
-        //
-    }
-
-    /**
-     * Determine whether the user can restore the model.
-     */
-    public function restore(User $user, Tag $tag): bool
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     */
-    public function forceDelete(User $user, Tag $tag): bool
-    {
-        //
+        return $this->update($user, $tag);
     }
 }
