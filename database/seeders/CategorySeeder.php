@@ -13,9 +13,9 @@ class CategorySeeder extends Seeder
     public function run(): void
     {
         $categories = [
-            'action',
-            'horror',
-            'drama',
+            'Web Development',
+            'Adventure',
+            'Cooking',
         ];
 
         foreach ($categories as $category) {
