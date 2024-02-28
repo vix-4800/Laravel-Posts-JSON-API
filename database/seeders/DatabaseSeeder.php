@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
         $seeders = [
             CategorySeeder::class,
             PostSeeder::class,
-            TagsSeeder::class,
+            CommentSeeder::class,
         ];
 
         foreach ($seeders as $seeder) {
