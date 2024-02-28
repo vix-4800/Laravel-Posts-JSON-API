@@ -2,6 +2,7 @@
 
 namespace App\JsonApi\V1;
 
+use App\Models\Comment;
 use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
 use LaravelJsonApi\Core\Server\Server as BaseServer;
@@ -22,6 +23,10 @@ class Server extends BaseServer
 
         Post::creating(static function (Post $post): void {
             $post->author()->associate(Auth::user());
+        });
+
+        Comment::creating(static function (Comment $comment): void {
+            $comment->user()->associate(Auth::user());
         });
     }
 
