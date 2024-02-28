@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
 
         $seeders = [
             CategorySeeder::class,
+            TagSeeder::class,
             PostSeeder::class,
             CommentSeeder::class,
         ];
