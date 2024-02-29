@@ -21,14 +21,14 @@ paths:
             type: integer
             default:
           description: Items per page
-          example: '5'
+          example: "5"
         - name: page[page]
           in: query
           schema:
             type: integer
             default:
           description: Page number
-          example: '1'
+          example: "1"
         - name: include
           in: query
           schema:
@@ -44,7 +44,7 @@ paths:
           description: Filter by category name
           example: Web
       responses:
-        '200':
+        "200":
           description: OK
           headers:
             Host:
@@ -86,17 +86,17 @@ paths:
               description: "Maximum number of requests allowed in a defined period"
               schema:
                 type: integer
-                example: '60'
+                example: "60"
             X-RateLimit-Remaining:
               description: "Number of remaining requests before reaching the limit"
               schema:
                 type: integer
-                example: '57'
+                example: "57"
             Access-Control-Allow-Origin:
               description: "Allowed origin for requests (CORS)"
               schema:
                 type: string
-                example: '*'
+                example: "*"
           content:
             application/vnd.api+json:
               schema:
@@ -234,7 +234,7 @@ paths:
                         links:
                           type: object
                           properties:
-                            self: 
+                            self:
                               type: string
                         meta:
                           type: object
@@ -251,13 +251,13 @@ paths:
                     to: 1
                     total: 1
                 jsonapi:
-                  version: '1.0'
+                  version: "1.0"
                 links:
                   first: http://localhost/api/v1/categories?filter%5Bname%5D=Web&include=posts&page%5Blimit%5D=2&page%5Bpage%5D=1
                   last: http://localhost/api/v1/categories?filter%5Bname%5D=Web&include=posts&page%5Blimit%5D=2&page%5Bpage%5D=1
                 data:
                   - type: categories
-                    id: '1'
+                    id: "1"
                     attributes:
                       name: Web Development
                     relationships:
@@ -267,16 +267,17 @@ paths:
                           self: http://localhost/api/v1/categories/1/relationships/posts
                         data:
                           - type: posts
-                            id: '1'
+                            id: "1"
                     links:
                       self: http://localhost/api/v1/categories/1
                 included:
                   - type: posts
-                    id: '1'
+                    id: "1"
                     attributes:
                       title: ut vero harum aut earum
                       slug: modi-ea-tempora-impedit-dolorum-similique-expedita-suscipit
-                      content: Velit ipsa et nihil pariatur hic aliquam. Recusandae
+                      content:
+                        Velit ipsa et nihil pariatur hic aliquam. Recusandae
                         delectus cumque aliquid nihil animi quia. Accusamus
                         ullam nihil qui exercitationem.
                     relationships:
@@ -299,8 +300,8 @@ paths:
                     links:
                       self: http://localhost/api/v1/posts/1
                     meta:
-                      published_at: '2011-12-20T07:07:43.000000Z'
-        '400':
+                      published_at: "2011-12-20T07:07:43.000000Z"
+        "400":
           description: Bad Request
           headers:
             Host:
@@ -342,17 +343,17 @@ paths:
               description: "Maximum number of requests allowed in a defined period"
               schema:
                 type: integer
-                example: '60'
+                example: "60"
             X-RateLimit-Remaining:
               description: "Number of remaining requests before reaching the limit"
               schema:
                 type: integer
-                example: '57'
+                example: "57"
             Access-Control-Allow-Origin:
               description: "Allowed origin for requests (CORS)"
               schema:
                 type: string
-                example: '*'
+                example: "*"
           content:
             application/vnd.api+json:
               schema:
@@ -363,7 +364,7 @@ paths:
                     properties:
                       version:
                         type: string
-                  errors: 
+                  errors:
                     type: array
                     items:
                       type: object
@@ -381,14 +382,14 @@ paths:
                           type: string
               example:
                 jsonapi:
-                  version: '1.0'
+                  version: "1.0"
                 errors:
                   - detail: Filter parameter names is not allowed.
                     source:
                       parameter: filter
-                    status: '400'
+                    status: "400"
                     title: Invalid Query Parameter
-        '406':
+        "406":
           description: Not Acceptable
           headers:
             Host:
@@ -430,17 +431,17 @@ paths:
               description: "Maximum number of requests allowed in a defined period"
               schema:
                 type: integer
-                example: '60'
+                example: "60"
             X-RateLimit-Remaining:
               description: "Number of remaining requests before reaching the limit"
               schema:
                 type: integer
-                example: '57'
+                example: "57"
             Access-Control-Allow-Origin:
               description: "Allowed origin for requests (CORS)"
               schema:
                 type: string
-                example: '*'
+                example: "*"
           content:
             application/vnd.api+json:
               schema:
@@ -470,7 +471,8 @@ paths:
                         type:
                           type: string
               example:
-                message: The requested resource is capable of generating only content
+                message:
+                  The requested resource is capable of generating only content
                   not acceptable according to the Accept headers sent in the
                   request.
                 exception: LaravelJsonApi\Laravel\Exceptions\HttpNotAcceptableException
@@ -481,9 +483,9 @@ paths:
                     line: 287
                     function: notAcceptable
                     class: LaravelJsonApi\Laravel\Http\Requests\ResourceQuery
-                    type: '->'
+                    type: "->"
                   - file: /var/www/html/vendor/laravel/framework/src/Illuminate/Validation/ValidatesWhenResolvedTrait.php
                     line: 19
                     function: prepareForValidation
                     class: LaravelJsonApi\Laravel\Http\Requests\ResourceQuery
-                    type: '->'
+                    type: "->"
