@@ -3,10 +3,10 @@ openapi: 3.0.0
 info:
   title: Local JSON:API
   version: 1.0.0
-  
+
 servers:
   - url: http://localhost:8000/api
-  
+
 components:
   securitySchemes:
     noauthAuth:
@@ -15,22 +15,23 @@ components:
     bearerAuth:
       type: http
       scheme: bearer
-      
+
 security:
   - bearerAuth: []
-  
+
 paths:
   /v1/posts:
     get:
       tags:
         - Posts
       summary: Get all posts
-      description: This endpoint retrieves a list of all inscances from the specified
+      description:
+        This endpoint retrieves a list of all inscances from the specified
         model.
       security:
         - noauthAuth: []
       responses:
-        '200':
+        "200":
           description: OK
           headers:
             Host:
@@ -60,25 +61,25 @@ paths:
             X-RateLimit-Limit:
               schema:
                 type: integer
-                example: '60'
+                example: "60"
             X-RateLimit-Remaining:
               schema:
                 type: integer
-                example: '59'
+                example: "59"
             Access-Control-Allow-Origin:
               schema:
                 type: string
-                example: '*'
+                example: "*"
           content:
             application/json:
               schema:
                 type: object
               example:
                 jsonapi:
-                  version: '1.0'
+                  version: "1.0"
                 data:
                   - type: posts
-                    id: '1'
+                    id: "1"
                     attributes:
                       title: ut vero harum aut earum
                       slug: >-
@@ -87,9 +88,9 @@ paths:
                         Velit ipsa et nihil pariatur hic aliquam. Recusandae
                         delectus cumque aliquid nihil animi quia. Accusamus
                         ullam nihil qui exercitationem.
-                      published_at: '2011-12-20T07:07:43.000000Z'
-                      created_at: '2024-02-28T13:24:32.000000Z'
-                      updated_at: '2024-02-28T13:24:32.000000Z'
+                      published_at: "2011-12-20T07:07:43.000000Z"
+                      created_at: "2024-02-28T13:24:32.000000Z"
+                      updated_at: "2024-02-28T13:24:32.000000Z"
                     relationships:
                       author:
                         links:
@@ -127,12 +128,12 @@ paths:
                 data:
                   type: posts
                   attributes:
-                    content: ''
+                    content: ""
                     published_at: null
-                    slug: ''
-                    title: ''
+                    slug: ""
+                    title: ""
       responses:
-        '201':
+        "201":
           description: Created
           headers:
             Host:
@@ -166,34 +167,34 @@ paths:
             X-RateLimit-Limit:
               schema:
                 type: integer
-                example: '60'
+                example: "60"
             X-RateLimit-Remaining:
               schema:
                 type: integer
-                example: '59'
+                example: "59"
             Access-Control-Allow-Origin:
               schema:
                 type: string
-                example: '*'
+                example: "*"
           content:
             application/json:
               schema:
                 type: object
               example:
                 jsonapi:
-                  version: '1.0'
+                  version: "1.0"
                 links:
                   self: http://localhost:8000/api/v1/posts/151
                 data:
                   type: posts
-                  id: '151'
+                  id: "151"
                   attributes:
                     title: New post title
                     slug: new-post
                     content: New post content
                     published_at: null
-                    created_at: '2024-02-28T17:36:42.000000Z'
-                    updated_at: '2024-02-28T17:36:42.000000Z'
+                    created_at: "2024-02-28T17:36:42.000000Z"
+                    updated_at: "2024-02-28T17:36:42.000000Z"
                   relationships:
                     author:
                       links:
@@ -202,7 +203,7 @@ paths:
                           http://localhost:8000/api/v1/posts/151/relationships/author
                       data:
                         type: users
-                        id: '1'
+                        id: "1"
                     comments:
                       links:
                         related: http://localhost:8000/api/v1/posts/151/comments
@@ -215,7 +216,7 @@ paths:
                           http://localhost:8000/api/v1/posts/151/relationships/tags
                       data:
                         - type: tags
-                          id: '3'
+                          id: "3"
                     categories:
                       links:
                         related: http://localhost:8000/api/v1/posts/151/categories
@@ -225,13 +226,13 @@ paths:
                     self: http://localhost:8000/api/v1/posts/151
                 included:
                   - type: users
-                    id: '1'
+                    id: "1"
                     attributes:
                       name: Lizeth Roob
                       email: sawayn.pearl@example.org
-                      email_verified_at: '2024-02-28T16:42:48.000000Z'
-                      created_at: '2024-02-28T16:42:49.000000Z'
-                      updated_at: '2024-02-28T16:42:49.000000Z'
+                      email_verified_at: "2024-02-28T16:42:48.000000Z"
+                      created_at: "2024-02-28T16:42:49.000000Z"
+                      updated_at: "2024-02-28T16:42:49.000000Z"
                     relationships:
                       posts:
                         links:
@@ -261,7 +262,7 @@ paths:
           required: true
           description: The ID of the post to be retrieved
       responses:
-        '200':
+        "200":
           description: OK
           headers:
             Host:
@@ -291,27 +292,27 @@ paths:
             X-RateLimit-Limit:
               schema:
                 type: integer
-                example: '60'
+                example: "60"
             X-RateLimit-Remaining:
               schema:
                 type: integer
-                example: '57'
+                example: "57"
             Access-Control-Allow-Origin:
               schema:
                 type: string
-                example: '*'
+                example: "*"
           content:
             application/json:
               schema:
                 type: object
               example:
                 jsonapi:
-                  version: '1.0'
+                  version: "1.0"
                 links:
                   self: http://localhost:8000/api/v1/posts/5
                 data:
                   type: posts
-                  id: '5'
+                  id: "5"
                   attributes:
                     title: quis nobis totam sint corporis
                     slug: qui-incidunt-laborum-hic-nulla-dolor-consectetur-quod
@@ -321,9 +322,9 @@ paths:
                       rerum. Accusantium repellendus dolor et mollitia et illo
                       consequatur. Et pariatur voluptate molestias harum
                       recusandae commodi omnis.
-                    published_at: '1989-07-06T06:21:34.000000Z'
-                    created_at: '2024-02-28T16:42:49.000000Z'
-                    updated_at: '2024-02-28T16:42:49.000000Z'
+                    published_at: "1989-07-06T06:21:34.000000Z"
+                    created_at: "2024-02-28T16:42:49.000000Z"
+                    updated_at: "2024-02-28T16:42:49.000000Z"
                   relationships:
                     author:
                       links:
@@ -337,7 +338,7 @@ paths:
                           http://localhost:8000/api/v1/posts/5/relationships/comments
                       data:
                         - type: comments
-                          id: '1'
+                          id: "1"
                     tags:
                       links:
                         related: http://localhost:8000/api/v1/posts/5/tags
@@ -345,7 +346,7 @@ paths:
                           http://localhost:8000/api/v1/posts/5/relationships/tags
                       data:
                         - type: tags
-                          id: '1'
+                          id: "1"
                     categories:
                       links:
                         related: http://localhost:8000/api/v1/posts/5/categories
@@ -355,14 +356,14 @@ paths:
                     self: http://localhost:8000/api/v1/posts/5
                 included:
                   - type: comments
-                    id: '1'
+                    id: "1"
                     attributes:
                       content: >-
                         Aut deleniti autem quo cumque hic incidunt. Corrupti id
                         rerum aperiam. Ea tempora esse voluptates alias.
                         Exercitationem perspiciatis eum maxime at.
-                      created_at: '2024-02-28T16:42:49.000000Z'
-                      updated_at: '2024-02-28T16:42:49.000000Z'
+                      created_at: "2024-02-28T16:42:49.000000Z"
+                      updated_at: "2024-02-28T16:42:49.000000Z"
                     relationships:
                       user:
                         links:
@@ -377,11 +378,11 @@ paths:
                     links:
                       self: http://localhost:8000/api/v1/comments/1
                   - type: tags
-                    id: '1'
+                    id: "1"
                     attributes:
                       name: Technology
-                      created_at: '2024-02-28T16:42:49.000000Z'
-                      updated_at: '2024-02-28T16:42:49.000000Z'
+                      created_at: "2024-02-28T16:42:49.000000Z"
+                      updated_at: "2024-02-28T16:42:49.000000Z"
                     relationships:
                       posts:
                         links:
@@ -402,10 +403,10 @@ paths:
               example:
                 data:
                   type: posts
-                  id: ''
+                  id: ""
                   attributes:
                     published_at: null
-                    title: ''
+                    title: ""
       parameters:
         - name: id
           in: path
@@ -414,7 +415,7 @@ paths:
           required: true
           description: The ID of the post to be updated
       responses:
-        '200':
+        "200":
           description: OK
           headers:
             Host:
@@ -444,27 +445,27 @@ paths:
             X-RateLimit-Limit:
               schema:
                 type: integer
-                example: '60'
+                example: "60"
             X-RateLimit-Remaining:
               schema:
                 type: integer
-                example: '58'
+                example: "58"
             Access-Control-Allow-Origin:
               schema:
                 type: string
-                example: '*'
+                example: "*"
           content:
             application/json:
               schema:
                 type: object
               example:
                 jsonapi:
-                  version: '1.0'
+                  version: "1.0"
                 links:
                   self: http://localhost:8000/api/v1/posts/4
                 data:
                   type: posts
-                  id: '4'
+                  id: "4"
                   attributes:
                     title: Updated title
                     slug: impedit-non-fuga-nostrum-autem-accusamus
@@ -472,9 +473,9 @@ paths:
                       Quasi et quis non. Quia et rerum expedita facilis beatae
                       porro. Consequuntur et non et et repudiandae officia et
                       accusamus.
-                    published_at: '2000-10-26T07:33:17.000000Z'
-                    created_at: '2024-02-28T16:42:49.000000Z'
-                    updated_at: '2024-02-28T17:45:53.000000Z'
+                    published_at: "2000-10-26T07:33:17.000000Z"
+                    created_at: "2024-02-28T16:42:49.000000Z"
+                    updated_at: "2024-02-28T17:45:53.000000Z"
                   relationships:
                     author:
                       links:
@@ -499,7 +500,7 @@ paths:
                           http://localhost:8000/api/v1/posts/4/relationships/categories
                   links:
                     self: http://localhost:8000/api/v1/posts/4
-        '403':
+        "403":
           description: Forbidden
           headers:
             Host:
@@ -529,27 +530,27 @@ paths:
             X-RateLimit-Limit:
               schema:
                 type: integer
-                example: '60'
+                example: "60"
             X-RateLimit-Remaining:
               schema:
                 type: integer
-                example: '57'
+                example: "57"
             Access-Control-Allow-Origin:
               schema:
                 type: string
-                example: '*'
+                example: "*"
           content:
             application/json:
               schema:
                 type: object
               example:
                 jsonapi:
-                  version: '1.0'
+                  version: "1.0"
                 errors:
                   - detail: This action is unauthorized.
-                    status: '403'
+                    status: "403"
                     title: Forbidden
-        '422':
+        "422":
           description: Unprocessable Content
           headers:
             Host:
@@ -579,27 +580,27 @@ paths:
             X-RateLimit-Limit:
               schema:
                 type: integer
-                example: '60'
+                example: "60"
             X-RateLimit-Remaining:
               schema:
                 type: integer
-                example: '58'
+                example: "58"
             Access-Control-Allow-Origin:
               schema:
                 type: string
-                example: '*'
+                example: "*"
           content:
             application/json:
               schema:
                 type: object
               example:
                 jsonapi:
-                  version: '1.0'
+                  version: "1.0"
                 errors:
                   - detail: The title field is required.
                     source:
                       pointer: /data/attributes/title
-                    status: '422'
+                    status: "422"
                     title: Unprocessable Entity
     delete:
       tags:
@@ -613,7 +614,7 @@ paths:
           required: true
           description: The ID of the post to be deleted
       responses:
-        '204':
+        "204":
           description: No Content
           headers:
             Host:
@@ -639,15 +640,15 @@ paths:
             X-RateLimit-Limit:
               schema:
                 type: integer
-                example: '60'
+                example: "60"
             X-RateLimit-Remaining:
               schema:
                 type: integer
-                example: '59'
+                example: "59"
             Access-Control-Allow-Origin:
               schema:
                 type: string
-                example: '*'
+                example: "*"
           content:
             text/plain:
               schema:
@@ -674,7 +675,7 @@ paths:
             type: string
           required: true
       responses:
-        '200':
+        "200":
           description: OK
           headers:
             Host:
@@ -704,37 +705,37 @@ paths:
             X-RateLimit-Limit:
               schema:
                 type: integer
-                example: '60'
+                example: "60"
             X-RateLimit-Remaining:
               schema:
                 type: integer
-                example: '59'
+                example: "59"
             Access-Control-Allow-Origin:
               schema:
                 type: string
-                example: '*'
+                example: "*"
           content:
             application/json:
               schema:
                 type: object
               example:
                 jsonapi:
-                  version: '1.0'
+                  version: "1.0"
                 links:
                   related: http://localhost:8000/api/v1/posts/130/comments
                   self: >-
                     http://localhost:8000/api/v1/posts/130/relationships/comments
                 data:
                   - type: comments
-                    id: '11'
+                    id: "11"
                     attributes:
                       content: >-
                         Quo non velit enim eligendi fugit. Consequuntur quasi
                         facilis nam explicabo facilis rerum. Et maiores in et
                         aliquam voluptatem molestiae debitis. Omnis accusantium
                         est aut facilis molestiae aut.
-                      created_at: '2024-02-28T16:42:49.000000Z'
-                      updated_at: '2024-02-28T16:42:49.000000Z'
+                      created_at: "2024-02-28T16:42:49.000000Z"
+                      updated_at: "2024-02-28T16:42:49.000000Z"
                     relationships:
                       user:
                         links:
@@ -749,13 +750,13 @@ paths:
                     links:
                       self: http://localhost:8000/api/v1/comments/11
                   - type: comments
-                    id: '15'
+                    id: "15"
                     attributes:
                       content: >-
                         Et id cum qui non tenetur. Sit occaecati laboriosam et
                         assumenda cum dolorem.
-                      created_at: '2024-02-28T16:42:49.000000Z'
-                      updated_at: '2024-02-28T16:42:49.000000Z'
+                      created_at: "2024-02-28T16:42:49.000000Z"
+                      updated_at: "2024-02-28T16:42:49.000000Z"
                     relationships:
                       user:
                         links:
@@ -781,8 +782,8 @@ paths:
               type: object
               example:
                 data:
-                  - type: ''
-                    id: ''
+                  - type: ""
+                    id: ""
       parameters:
         - name: id
           in: path
@@ -796,7 +797,7 @@ paths:
             type: string
           required: true
       responses:
-        '200':
+        "200":
           description: OK
           headers:
             Host:
@@ -826,28 +827,28 @@ paths:
             X-RateLimit-Limit:
               schema:
                 type: integer
-                example: '60'
+                example: "60"
             X-RateLimit-Remaining:
               schema:
                 type: integer
-                example: '59'
+                example: "59"
             Access-Control-Allow-Origin:
               schema:
                 type: string
-                example: '*'
+                example: "*"
           content:
             application/json:
               schema:
                 type: object
               example:
                 jsonapi:
-                  version: '1.0'
+                  version: "1.0"
                 links:
                   related: http://localhost:8000/api/v1/posts/4/tags
                   self: http://localhost:8000/api/v1/posts/4/relationships/tags
                 data:
                   - type: tags
-                    id: '2'
+                    id: "2"
     delete:
       tags:
         - Posts
@@ -865,7 +866,7 @@ paths:
             type: string
           required: true
       responses:
-        '204':
+        "204":
           description: No Content
           headers:
             Host:
@@ -891,15 +892,15 @@ paths:
             X-RateLimit-Limit:
               schema:
                 type: integer
-                example: '60'
+                example: "60"
             X-RateLimit-Remaining:
               schema:
                 type: integer
-                example: '58'
+                example: "58"
             Access-Control-Allow-Origin:
               schema:
                 type: string
-                example: '*'
+                example: "*"
           content:
             text/plain:
               schema:
@@ -916,7 +917,7 @@ paths:
       security:
         - noauthAuth: []
       responses:
-        '200':
+        "200":
           description: OK
           headers:
             Host:
@@ -946,29 +947,29 @@ paths:
             X-RateLimit-Limit:
               schema:
                 type: integer
-                example: '60'
+                example: "60"
             X-RateLimit-Remaining:
               schema:
                 type: integer
-                example: '58'
+                example: "58"
             Access-Control-Allow-Origin:
               schema:
                 type: string
-                example: '*'
+                example: "*"
           content:
             application/json:
               schema:
                 type: object
               example:
                 jsonapi:
-                  version: '1.0'
+                  version: "1.0"
                 data:
                   - type: tags
-                    id: '1'
+                    id: "1"
                     attributes:
                       name: Technology
-                      created_at: '2024-02-28T13:24:31.000000Z'
-                      updated_at: '2024-02-28T13:24:31.000000Z'
+                      created_at: "2024-02-28T13:24:31.000000Z"
+                      updated_at: "2024-02-28T13:24:31.000000Z"
                     relationships:
                       posts:
                         links:
@@ -977,11 +978,11 @@ paths:
                     links:
                       self: http://localhost/api/v1/tags/1
                   - type: tags
-                    id: '2'
+                    id: "2"
                     attributes:
                       name: Travel
-                      created_at: '2024-02-28T13:24:31.000000Z'
-                      updated_at: '2024-02-28T13:24:31.000000Z'
+                      created_at: "2024-02-28T13:24:31.000000Z"
+                      updated_at: "2024-02-28T13:24:31.000000Z"
                     relationships:
                       posts:
                         links:
@@ -1005,9 +1006,9 @@ paths:
                 data:
                   type: tags
                   attributes:
-                    name: ''
+                    name: ""
       responses:
-        '201':
+        "201":
           description: Created
           headers:
             Host:
@@ -1041,31 +1042,31 @@ paths:
             X-RateLimit-Limit:
               schema:
                 type: integer
-                example: '60'
+                example: "60"
             X-RateLimit-Remaining:
               schema:
                 type: integer
-                example: '59'
+                example: "59"
             Access-Control-Allow-Origin:
               schema:
                 type: string
-                example: '*'
+                example: "*"
           content:
             application/json:
               schema:
                 type: object
               example:
                 jsonapi:
-                  version: '1.0'
+                  version: "1.0"
                 links:
                   self: http://localhost:8000/api/v1/tags/6
                 data:
                   type: tags
-                  id: '6'
+                  id: "6"
                   attributes:
                     name: New tag
-                    created_at: '2024-02-28T18:16:51.000000Z'
-                    updated_at: '2024-02-28T18:16:51.000000Z'
+                    created_at: "2024-02-28T18:16:51.000000Z"
+                    updated_at: "2024-02-28T18:16:51.000000Z"
                   relationships:
                     posts:
                       links:
@@ -1094,7 +1095,7 @@ paths:
           required: true
           description: The ID of the tag to be retrieved
       responses:
-        '200':
+        "200":
           description: OK
           headers:
             Host:
@@ -1124,31 +1125,31 @@ paths:
             X-RateLimit-Limit:
               schema:
                 type: integer
-                example: '60'
+                example: "60"
             X-RateLimit-Remaining:
               schema:
                 type: integer
-                example: '57'
+                example: "57"
             Access-Control-Allow-Origin:
               schema:
                 type: string
-                example: '*'
+                example: "*"
           content:
             application/json:
               schema:
                 type: object
               example:
                 jsonapi:
-                  version: '1.0'
+                  version: "1.0"
                 links:
                   self: http://localhost:8000/api/v1/tags/1
                 data:
                   type: tags
-                  id: '1'
+                  id: "1"
                   attributes:
                     name: Technology
-                    created_at: '2024-02-28T16:42:49.000000Z'
-                    updated_at: '2024-02-28T16:42:49.000000Z'
+                    created_at: "2024-02-28T16:42:49.000000Z"
+                    updated_at: "2024-02-28T16:42:49.000000Z"
                   relationships:
                     posts:
                       links:
@@ -1157,14 +1158,14 @@ paths:
                           http://localhost:8000/api/v1/tags/1/relationships/posts
                       data:
                         - type: posts
-                          id: '1'
+                          id: "1"
                         - type: posts
-                          id: '2'
+                          id: "2"
                   links:
                     self: http://localhost:8000/api/v1/tags/1
                 included:
                   - type: posts
-                    id: '1'
+                    id: "1"
                     attributes:
                       title: esse ut iusto vel quia
                       slug: consequuntur-voluptate-velit-et-nisi
@@ -1173,9 +1174,9 @@ paths:
                         voluptatum id ut voluptas. Et aperiam laudantium ut
                         expedita. Maxime sint et commodi error nesciunt culpa a.
                         Blanditiis minus eum voluptatem quibusdam aut deleniti.
-                      published_at: '2023-12-14T11:27:00.000000Z'
-                      created_at: '2024-02-28T16:42:49.000000Z'
-                      updated_at: '2024-02-28T16:42:49.000000Z'
+                      published_at: "2023-12-14T11:27:00.000000Z"
+                      created_at: "2024-02-28T16:42:49.000000Z"
+                      updated_at: "2024-02-28T16:42:49.000000Z"
                     relationships:
                       author:
                         links:
@@ -1200,7 +1201,7 @@ paths:
                     links:
                       self: http://localhost:8000/api/v1/posts/1
                   - type: posts
-                    id: '2'
+                    id: "2"
                     attributes:
                       title: repellendus possimus magnam corrupti veniam
                       slug: explicabo-dolor-sed-quibusdam-eos-eaque-asperiores
@@ -1209,9 +1210,9 @@ paths:
                         exercitationem sit ipsam fugiat fuga. Neque nihil
                         molestiae facilis at voluptas neque. Rerum eaque
                         officiis voluptas beatae ducimus.
-                      published_at: '2007-06-01T15:18:59.000000Z'
-                      created_at: '2024-02-28T16:42:49.000000Z'
-                      updated_at: '2024-02-28T16:42:49.000000Z'
+                      published_at: "2007-06-01T15:18:59.000000Z"
+                      created_at: "2024-02-28T16:42:49.000000Z"
+                      updated_at: "2024-02-28T16:42:49.000000Z"
                     relationships:
                       author:
                         links:
@@ -1247,9 +1248,9 @@ paths:
               example:
                 data:
                   type: tags
-                  id: ''
+                  id: ""
                   attributes:
-                    name: ''
+                    name: ""
       parameters:
         - name: id
           in: path
@@ -1258,7 +1259,7 @@ paths:
           required: true
           description: The ID of the tag to be updated
       responses:
-        '200':
+        "200":
           description: OK
           headers:
             Host:
@@ -1288,31 +1289,31 @@ paths:
             X-RateLimit-Limit:
               schema:
                 type: integer
-                example: '60'
+                example: "60"
             X-RateLimit-Remaining:
               schema:
                 type: integer
-                example: '59'
+                example: "59"
             Access-Control-Allow-Origin:
               schema:
                 type: string
-                example: '*'
+                example: "*"
           content:
             application/json:
               schema:
                 type: object
               example:
                 jsonapi:
-                  version: '1.0'
+                  version: "1.0"
                 links:
                   self: http://localhost:8000/api/v1/tags/7
                 data:
                   type: tags
-                  id: '7'
+                  id: "7"
                   attributes:
                     name: Updated name
-                    created_at: '2024-02-28T18:21:13.000000Z'
-                    updated_at: '2024-02-28T18:22:15.000000Z'
+                    created_at: "2024-02-28T18:21:13.000000Z"
+                    updated_at: "2024-02-28T18:22:15.000000Z"
                   relationships:
                     posts:
                       links:
@@ -1333,7 +1334,7 @@ paths:
           required: true
           description: The ID of the tag to be deleted
       responses:
-        '204':
+        "204":
           description: No Content
           headers:
             Host:
@@ -1359,15 +1360,15 @@ paths:
             X-RateLimit-Limit:
               schema:
                 type: integer
-                example: '60'
+                example: "60"
             X-RateLimit-Remaining:
               schema:
                 type: integer
-                example: '59'
+                example: "59"
             Access-Control-Allow-Origin:
               schema:
                 type: string
-                example: '*'
+                example: "*"
           content:
             text/plain:
               schema:
@@ -1394,7 +1395,7 @@ paths:
             type: string
           required: true
       responses:
-        '200':
+        "200":
           description: OK
           headers:
             Host:
@@ -1424,15 +1425,15 @@ paths:
             X-RateLimit-Limit:
               schema:
                 type: integer
-                example: '60'
+                example: "60"
             X-RateLimit-Remaining:
               schema:
                 type: integer
-                example: '59'
+                example: "59"
             Access-Control-Allow-Origin:
               schema:
                 type: string
-                example: '*'
+                example: "*"
           content:
             application/json:
               schema:
@@ -1447,7 +1448,7 @@ paths:
                     to: 15
                     total: 66
                 jsonapi:
-                  version: '1.0'
+                  version: "1.0"
                 links:
                   first: >-
                     http://localhost:8000/api/v1/tags/3/posts?page%5Blimit%5D=15&page%5Bpage%5D=1
@@ -1459,7 +1460,7 @@ paths:
                   self: http://localhost:8000/api/v1/tags/3/relationships/posts
                 data:
                   - type: posts
-                    id: '1'
+                    id: "1"
                     attributes:
                       title: esse ut iusto vel quia
                       slug: consequuntur-voluptate-velit-et-nisi
@@ -1468,9 +1469,9 @@ paths:
                         voluptatum id ut voluptas. Et aperiam laudantium ut
                         expedita. Maxime sint et commodi error nesciunt culpa a.
                         Blanditiis minus eum voluptatem quibusdam aut deleniti.
-                      published_at: '2023-12-14T11:27:00.000000Z'
-                      created_at: '2024-02-28T16:42:49.000000Z'
-                      updated_at: '2024-02-28T16:42:49.000000Z'
+                      published_at: "2023-12-14T11:27:00.000000Z"
+                      created_at: "2024-02-28T16:42:49.000000Z"
+                      updated_at: "2024-02-28T16:42:49.000000Z"
                     relationships:
                       author:
                         links:
@@ -1495,7 +1496,7 @@ paths:
                     links:
                       self: http://localhost:8000/api/v1/posts/1
                   - type: posts
-                    id: '2'
+                    id: "2"
                     attributes:
                       title: repellendus possimus magnam corrupti veniam
                       slug: explicabo-dolor-sed-quibusdam-eos-eaque-asperiores
@@ -1504,9 +1505,9 @@ paths:
                         exercitationem sit ipsam fugiat fuga. Neque nihil
                         molestiae facilis at voluptas neque. Rerum eaque
                         officiis voluptas beatae ducimus.
-                      published_at: '2007-06-01T15:18:59.000000Z'
-                      created_at: '2024-02-28T16:42:49.000000Z'
-                      updated_at: '2024-02-28T16:42:49.000000Z'
+                      published_at: "2007-06-01T15:18:59.000000Z"
+                      created_at: "2024-02-28T16:42:49.000000Z"
+                      updated_at: "2024-02-28T16:42:49.000000Z"
                     relationships:
                       author:
                         links:
@@ -1530,7 +1531,7 @@ paths:
                             http://localhost:8000/api/v1/posts/2/relationships/categories
                     links:
                       self: http://localhost:8000/api/v1/posts/2
-        '404':
+        "404":
           description: Not Found
           headers:
             Host:
@@ -1560,24 +1561,24 @@ paths:
             X-RateLimit-Limit:
               schema:
                 type: integer
-                example: '60'
+                example: "60"
             X-RateLimit-Remaining:
               schema:
                 type: integer
-                example: '57'
+                example: "57"
             Access-Control-Allow-Origin:
               schema:
                 type: string
-                example: '*'
+                example: "*"
           content:
             application/json:
               schema:
                 type: object
               example:
                 jsonapi:
-                  version: '1.0'
+                  version: "1.0"
                 errors:
-                  - status: '404'
+                  - status: "404"
                     title: Not Found
   /v1/categories:
     get:
@@ -1590,7 +1591,7 @@ paths:
       security:
         - noauthAuth: []
       responses:
-        '200':
+        "200":
           description: OK
           headers:
             Host:
@@ -1620,29 +1621,29 @@ paths:
             X-RateLimit-Limit:
               schema:
                 type: integer
-                example: '60'
+                example: "60"
             X-RateLimit-Remaining:
               schema:
                 type: integer
-                example: '57'
+                example: "57"
             Access-Control-Allow-Origin:
               schema:
                 type: string
-                example: '*'
+                example: "*"
           content:
             application/json:
               schema:
                 type: object
               example:
                 jsonapi:
-                  version: '1.0'
+                  version: "1.0"
                 data:
                   - type: categories
-                    id: '1'
+                    id: "1"
                     attributes:
                       name: Web Development
-                      created_at: '2024-02-28T13:24:31.000000Z'
-                      updated_at: '2024-02-28T13:24:31.000000Z'
+                      created_at: "2024-02-28T13:24:31.000000Z"
+                      updated_at: "2024-02-28T13:24:31.000000Z"
                     relationships:
                       posts:
                         links:
@@ -1652,11 +1653,11 @@ paths:
                     links:
                       self: http://localhost/api/v1/categories/1
                   - type: categories
-                    id: '2'
+                    id: "2"
                     attributes:
                       name: Adventure
-                      created_at: '2024-02-28T13:24:31.000000Z'
-                      updated_at: '2024-02-28T13:24:31.000000Z'
+                      created_at: "2024-02-28T13:24:31.000000Z"
+                      updated_at: "2024-02-28T13:24:31.000000Z"
                     relationships:
                       posts:
                         links:
@@ -1681,9 +1682,9 @@ paths:
                 data:
                   type: categories
                   attributes:
-                    name: ''
+                    name: ""
       responses:
-        '201':
+        "201":
           description: Created
           headers:
             Host:
@@ -1717,31 +1718,31 @@ paths:
             X-RateLimit-Limit:
               schema:
                 type: integer
-                example: '60'
+                example: "60"
             X-RateLimit-Remaining:
               schema:
                 type: integer
-                example: '59'
+                example: "59"
             Access-Control-Allow-Origin:
               schema:
                 type: string
-                example: '*'
+                example: "*"
           content:
             application/json:
               schema:
                 type: object
               example:
                 jsonapi:
-                  version: '1.0'
+                  version: "1.0"
                 links:
                   self: http://localhost:8000/api/v1/categories/4
                 data:
                   type: categories
-                  id: '4'
+                  id: "4"
                   attributes:
                     name: New category
-                    created_at: '2024-02-28T18:42:06.000000Z'
-                    updated_at: '2024-02-28T18:42:06.000000Z'
+                    created_at: "2024-02-28T18:42:06.000000Z"
+                    updated_at: "2024-02-28T18:42:06.000000Z"
                   relationships:
                     posts:
                       links:
@@ -1766,7 +1767,7 @@ paths:
           required: true
           description: The ID of the category to be retrieved
       responses:
-        '200':
+        "200":
           description: OK
           headers:
             Host:
@@ -1796,31 +1797,31 @@ paths:
             X-RateLimit-Limit:
               schema:
                 type: integer
-                example: '60'
+                example: "60"
             X-RateLimit-Remaining:
               schema:
                 type: integer
-                example: '59'
+                example: "59"
             Access-Control-Allow-Origin:
               schema:
                 type: string
-                example: '*'
+                example: "*"
           content:
             application/json:
               schema:
                 type: object
               example:
                 jsonapi:
-                  version: '1.0'
+                  version: "1.0"
                 links:
                   self: http://localhost:8000/api/v1/categories/1
                 data:
                   type: categories
-                  id: '1'
+                  id: "1"
                   attributes:
                     name: Web Development
-                    created_at: '2024-02-28T16:42:49.000000Z'
-                    updated_at: '2024-02-28T16:42:49.000000Z'
+                    created_at: "2024-02-28T16:42:49.000000Z"
+                    updated_at: "2024-02-28T16:42:49.000000Z"
                   relationships:
                     posts:
                       links:
@@ -1841,9 +1842,9 @@ paths:
               example:
                 data:
                   type: categories
-                  id: ''
+                  id: ""
                   attributes:
-                    name: ''
+                    name: ""
       parameters:
         - name: id
           in: path
@@ -1852,7 +1853,7 @@ paths:
           required: true
           description: The ID of the category to be updated
       responses:
-        '200':
+        "200":
           description: OK
           headers:
             Host:
@@ -1882,31 +1883,31 @@ paths:
             X-RateLimit-Limit:
               schema:
                 type: integer
-                example: '60'
+                example: "60"
             X-RateLimit-Remaining:
               schema:
                 type: integer
-                example: '59'
+                example: "59"
             Access-Control-Allow-Origin:
               schema:
                 type: string
-                example: '*'
+                example: "*"
           content:
             application/json:
               schema:
                 type: object
               example:
                 jsonapi:
-                  version: '1.0'
+                  version: "1.0"
                 links:
                   self: http://localhost:8000/api/v1/categories/4
                 data:
                   type: categories
-                  id: '4'
+                  id: "4"
                   attributes:
                     name: Updated name
-                    created_at: '2024-02-28T18:42:06.000000Z'
-                    updated_at: '2024-02-28T18:43:37.000000Z'
+                    created_at: "2024-02-28T18:42:06.000000Z"
+                    updated_at: "2024-02-28T18:43:37.000000Z"
                   relationships:
                     posts:
                       links:
@@ -1927,7 +1928,7 @@ paths:
           required: true
           description: The ID of the category to be deleted
       responses:
-        '204':
+        "204":
           description: No Content
           headers:
             Host:
@@ -1953,15 +1954,15 @@ paths:
             X-RateLimit-Limit:
               schema:
                 type: integer
-                example: '60'
+                example: "60"
             X-RateLimit-Remaining:
               schema:
                 type: integer
-                example: '58'
+                example: "58"
             Access-Control-Allow-Origin:
               schema:
                 type: string
-                example: '*'
+                example: "*"
           content:
             text/plain:
               schema:
@@ -1988,7 +1989,7 @@ paths:
             type: string
           required: true
       responses:
-        '200':
+        "200":
           description: OK
           headers:
             Host:
@@ -2018,29 +2019,29 @@ paths:
             X-RateLimit-Limit:
               schema:
                 type: integer
-                example: '60'
+                example: "60"
             X-RateLimit-Remaining:
               schema:
                 type: integer
-                example: '59'
+                example: "59"
             Access-Control-Allow-Origin:
               schema:
                 type: string
-                example: '*'
+                example: "*"
           content:
             application/json:
               schema:
                 type: object
               example:
                 jsonapi:
-                  version: '1.0'
+                  version: "1.0"
                 links:
                   related: http://localhost:8000/api/v1/categories/1/posts
                   self: >-
                     http://localhost:8000/api/v1/categories/1/relationships/posts
                 data:
                   - type: posts
-                    id: '1'
+                    id: "1"
                     attributes:
                       title: esse ut iusto vel quia
                       slug: consequuntur-voluptate-velit-et-nisi
@@ -2049,9 +2050,9 @@ paths:
                         voluptatum id ut voluptas. Et aperiam laudantium ut
                         expedita. Maxime sint et commodi error nesciunt culpa a.
                         Blanditiis minus eum voluptatem quibusdam aut deleniti.
-                      published_at: '2023-12-14T11:27:00.000000Z'
-                      created_at: '2024-02-28T16:42:49.000000Z'
-                      updated_at: '2024-02-28T16:42:49.000000Z'
+                      published_at: "2023-12-14T11:27:00.000000Z"
+                      created_at: "2024-02-28T16:42:49.000000Z"
+                      updated_at: "2024-02-28T16:42:49.000000Z"
                     relationships:
                       author:
                         links:
@@ -2076,7 +2077,7 @@ paths:
                     links:
                       self: http://localhost:8000/api/v1/posts/1
                   - type: posts
-                    id: '3'
+                    id: "3"
                     attributes:
                       title: est voluptatem iusto cum ratione
                       slug: tempora-et-consequatur-repellendus-et
@@ -2085,8 +2086,8 @@ paths:
                         ratione. Repellat et minima corporis voluptas aperiam
                         debitis est.
                       published_at: null
-                      created_at: '2024-02-28T16:42:49.000000Z'
-                      updated_at: '2024-02-28T16:42:49.000000Z'
+                      created_at: "2024-02-28T16:42:49.000000Z"
+                      updated_at: "2024-02-28T16:42:49.000000Z"
                     relationships:
                       author:
                         links:
@@ -2121,7 +2122,7 @@ paths:
       security:
         - noauthAuth: []
       responses:
-        '200':
+        "200":
           description: OK
           headers:
             Host:
@@ -2151,32 +2152,32 @@ paths:
             X-RateLimit-Limit:
               schema:
                 type: integer
-                example: '60'
+                example: "60"
             X-RateLimit-Remaining:
               schema:
                 type: integer
-                example: '59'
+                example: "59"
             Access-Control-Allow-Origin:
               schema:
                 type: string
-                example: '*'
+                example: "*"
           content:
             application/json:
               schema:
                 type: object
               example:
                 jsonapi:
-                  version: '1.0'
+                  version: "1.0"
                 data:
                   - type: comments
-                    id: '1'
+                    id: "1"
                     attributes:
                       content: >-
                         Assumenda beatae quidem qui enim qui iste suscipit.
                         Optio numquam sit quisquam harum. Consequatur omnis
                         officiis esse. Temporibus consequuntur quia eveniet.
-                      created_at: '2024-02-28T13:24:32.000000Z'
-                      updated_at: '2024-02-28T13:24:32.000000Z'
+                      created_at: "2024-02-28T13:24:32.000000Z"
+                      updated_at: "2024-02-28T13:24:32.000000Z"
                     relationships:
                       user:
                         links:
@@ -2191,14 +2192,14 @@ paths:
                     links:
                       self: http://localhost/api/v1/comments/1
                   - type: comments
-                    id: '2'
+                    id: "2"
                     attributes:
                       content: >-
                         Dolor voluptates necessitatibus voluptatem reprehenderit
                         perspiciatis distinctio fugiat. Laboriosam odio et quo
                         non.
-                      created_at: '2024-02-28T13:24:32.000000Z'
-                      updated_at: '2024-02-28T13:24:32.000000Z'
+                      created_at: "2024-02-28T13:24:32.000000Z"
+                      updated_at: "2024-02-28T13:24:32.000000Z"
                     relationships:
                       user:
                         links:
@@ -2228,12 +2229,15 @@ paths:
                 data:
                   type: comments
                   attributes:
-                    content: ''
+                    content: ""
                   relationships:
                     post:
                       data:
                         - type: posts
-                          id: ''
+                          id: ""
+      responses:
+        "200":
+          description: OK
   /v1/comments/{id}:
     get:
       tags:
@@ -2250,7 +2254,7 @@ paths:
           required: true
           description: The ID of the comment to be retrieved
       responses:
-        '200':
+        "200":
           description: OK
           headers:
             Host:
@@ -2280,34 +2284,34 @@ paths:
             X-RateLimit-Limit:
               schema:
                 type: integer
-                example: '60'
+                example: "60"
             X-RateLimit-Remaining:
               schema:
                 type: integer
-                example: '59'
+                example: "59"
             Access-Control-Allow-Origin:
               schema:
                 type: string
-                example: '*'
+                example: "*"
           content:
             application/json:
               schema:
                 type: object
               example:
                 jsonapi:
-                  version: '1.0'
+                  version: "1.0"
                 links:
                   self: http://localhost:8000/api/v1/comments/1
                 data:
                   type: comments
-                  id: '1'
+                  id: "1"
                   attributes:
                     content: >-
                       Aut deleniti autem quo cumque hic incidunt. Corrupti id
                       rerum aperiam. Ea tempora esse voluptates alias.
                       Exercitationem perspiciatis eum maxime at.
-                    created_at: '2024-02-28T16:42:49.000000Z'
-                    updated_at: '2024-02-28T16:42:49.000000Z'
+                    created_at: "2024-02-28T16:42:49.000000Z"
+                    updated_at: "2024-02-28T16:42:49.000000Z"
                   relationships:
                     user:
                       links:
@@ -2333,9 +2337,9 @@ paths:
               example:
                 data:
                   type: categories
-                  id: ''
+                  id: ""
                   attributes:
-                    name: ''
+                    name: ""
       parameters:
         - name: id
           in: path
@@ -2344,7 +2348,7 @@ paths:
           required: true
           description: The ID of the comment to be updated
       responses:
-        '200':
+        "200":
           description: Successful response
           content:
             application/json: {}
@@ -2360,7 +2364,7 @@ paths:
           required: true
           description: The ID of the comment to be deleted
       responses:
-        '200':
+        "200":
           description: Successful response
           content:
             application/json: {}
@@ -2385,7 +2389,7 @@ paths:
             type: string
           required: true
       responses:
-        '200':
+        "200":
           description: OK
           headers:
             Host:
@@ -2415,34 +2419,34 @@ paths:
             X-RateLimit-Limit:
               schema:
                 type: integer
-                example: '60'
+                example: "60"
             X-RateLimit-Remaining:
               schema:
                 type: integer
-                example: '58'
+                example: "58"
             Access-Control-Allow-Origin:
               schema:
                 type: string
-                example: '*'
+                example: "*"
           content:
             application/json:
               schema:
                 type: object
               example:
                 jsonapi:
-                  version: '1.0'
+                  version: "1.0"
                 links:
                   related: http://localhost:8000/api/v1/comments/1/user
                   self: http://localhost:8000/api/v1/comments/1/relationships/user
                 data:
                   type: users
-                  id: '13'
+                  id: "13"
                   attributes:
                     name: Prof. Joanie Pfannerstill
                     email: bud.kozey@example.net
-                    email_verified_at: '2024-02-28T16:42:49.000000Z'
-                    created_at: '2024-02-28T16:42:49.000000Z'
-                    updated_at: '2024-02-28T16:42:49.000000Z'
+                    email_verified_at: "2024-02-28T16:42:49.000000Z"
+                    created_at: "2024-02-28T16:42:49.000000Z"
+                    updated_at: "2024-02-28T16:42:49.000000Z"
                   relationships:
                     posts:
                       links:
@@ -2467,7 +2471,7 @@ paths:
       security:
         - noauthAuth: []
       responses:
-        '200':
+        "200":
           description: OK
           headers:
             Host:
@@ -2497,29 +2501,29 @@ paths:
             X-RateLimit-Limit:
               schema:
                 type: integer
-                example: '60'
+                example: "60"
             X-RateLimit-Remaining:
               schema:
                 type: integer
-                example: '59'
+                example: "59"
             Access-Control-Allow-Origin:
               schema:
                 type: string
-                example: '*'
+                example: "*"
           content:
             application/json:
               schema:
                 type: object
               example:
                 jsonapi:
-                  version: '1.0'
+                  version: "1.0"
                 data:
                   - type: users
-                    id: '1'
+                    id: "1"
                     attributes:
                       name: Lizeth Roob
                       email: sawayn.pearl@example.org
-                      registered_at: '2024-02-28T16:42:49.000000Z'
+                      registered_at: "2024-02-28T16:42:49.000000Z"
                     relationships:
                       posts:
                         links:
@@ -2534,11 +2538,11 @@ paths:
                     links:
                       self: http://localhost:8000/api/v1/users/1
                   - type: users
-                    id: '2'
+                    id: "2"
                     attributes:
                       name: Keshaun Frami MD
                       email: weissnat.adella@example.net
-                      registered_at: '2024-02-28T16:42:49.000000Z'
+                      registered_at: "2024-02-28T16:42:49.000000Z"
                     relationships:
                       posts:
                         links:
@@ -2568,7 +2572,7 @@ paths:
           required: true
           description: The ID of the user to be retrieved
       responses:
-        '200':
+        "200":
           description: Successful response
           content:
             application/json: {}
