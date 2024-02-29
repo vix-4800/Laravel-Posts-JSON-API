@@ -54,6 +54,9 @@ class UserSchema extends Schema
      */
     public function pagination(): ?Paginator
     {
-        return PagePagination::make();
+        return PagePagination::make()
+            ->withPageKey('page')
+            ->withPerPageKey('limit')
+            ->withDefaultPerPage(15);
     }
 }

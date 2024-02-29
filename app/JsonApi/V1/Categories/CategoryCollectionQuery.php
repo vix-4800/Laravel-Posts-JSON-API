@@ -33,6 +33,8 @@ class CategoryCollectionQuery extends ResourceQuery
                 'array',
                 JsonApiRule::page(),
             ],
+            'page.page' => ['integer', 'min:1'],
+            'page.limit' => ['integer', 'between:1,100'],
             'sort' => [
                 'nullable',
                 'string',
