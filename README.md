@@ -2,19 +2,13 @@
 
 ## Installation
 
-Create `.env` file and configure your environment
+Create a .env file by copying and renaming .env.example. Configure your environment settings. Uncomment DB_HOST for Docker or leave it commented out for basic installation.
 
 ### Using docker
 
-#### With Makefile
-
-    make install
-
-#### Without Makefile
-
 -   Install Laravel Dependencies
 
-        docker run --rm -u "$(id -u):$(id -g)" -v $(pwd):/var/www/html -w /var/www/html laravelsail/php81-composer:latest composer install --ignore-platform-reqs --no-progress --no-interaction
+        docker run --rm -v $(pwd):/opt -w /opt laravelsail/php83-composer composer install --no-progress --no-interaction
 
 ### Without docker
 
@@ -22,19 +16,7 @@ Create `.env` file and configure your environment
 
         composer install --ignore-platform-reqs --no-progress --no-interaction
 
--   Generate Laravel Application Key
-
-        php artisan key:generate
-
 ## After installation
-
-### Run migrations
-
--   `make migrate` - docker and makefile
-
--   `./vendor/bin/sail artisan migrate --seed` - docker without makefile
-
--   `php artisan migrate --seed` - without docker
 
 ### Start the application
 
@@ -43,6 +25,12 @@ Create `.env` file and configure your environment
 -   `./vendor/bin/sail up -d` - docker without makefile
 
 -   `php artisan serve` - without docker
+
+### Run migrations and seeders
+
+-   `./vendor/bin/sail artisan migrate --seed` - docker without makefile
+
+-   `php artisan migrate --seed` - without docker
 
 You can access the application using API at:
 
