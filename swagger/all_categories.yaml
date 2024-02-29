@@ -1,0 +1,489 @@
+openapi: 3.0.0
+
+info:
+  title: Local JSON:API
+  version: 1.0.0
+
+servers:
+  - url: http://localhost/api
+
+paths:
+  /v1/categories:
+    get:
+      tags:
+        - Categories
+      summary: Get all categories
+      description: This endpoint retrieves a list of all categories.
+      parameters:
+        - name: page[limit]
+          in: query
+          schema:
+            type: integer
+            default:
+          description: Items per page
+          example: '5'
+        - name: page[page]
+          in: query
+          schema:
+            type: integer
+            default:
+          description: Page number
+          example: '1'
+        - name: include
+          in: query
+          schema:
+            type: string
+            default:
+          description: Eager loading
+          example: posts
+        - name: filter[name]
+          in: query
+          schema:
+            type: string
+            default:
+          description: Filter by category name
+          example: Web
+      responses:
+        '200':
+          description: OK
+          headers:
+            Host:
+              description: "Host address"
+              schema:
+                type: string
+                example: localhost:80
+            Connection:
+              description: "Connection string"
+              schema:
+                type: string
+                example: close
+            X-Powered-By:
+              description: "Information about the technology used on the server"
+              schema:
+                type: string
+                example: PHP/8.3.3-1+ubuntu22.04.1+deb.sury.org+1
+            Content-Type:
+              description: "Content type"
+              schema:
+                type: string
+                example: application/vnd.api+json
+            Accept:
+              description: "Content type that the client is willing to accept"
+              schema:
+                type: string
+                example: application/vnd.api+json
+            Cache-Control:
+              description: "Cache control directives"
+              schema:
+                type: string
+                example: no-cache, private
+            Date:
+              description: "Response date"
+              schema:
+                type: string
+                example: Thu, 29 Feb 2024 06:16:38 GMT
+            X-RateLimit-Limit:
+              description: "Maximum number of requests allowed in a defined period"
+              schema:
+                type: integer
+                example: '60'
+            X-RateLimit-Remaining:
+              description: "Number of remaining requests before reaching the limit"
+              schema:
+                type: integer
+                example: '57'
+            Access-Control-Allow-Origin:
+              description: "Allowed origin for requests (CORS)"
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    type: object
+                    properties:
+                      page:
+                        type: object
+                        properties:
+                          currentPage:
+                            type: integer
+                          from:
+                            type: integer
+                          lastPage:
+                            type: integer
+                          perPage:
+                            type: integer
+                          to:
+                            type: integer
+                          total:
+                            type: integer
+                  jsonapi:
+                    type: object
+                    properties:
+                      version:
+                        type: string
+                  links:
+                    type: object
+                    properties:
+                      first:
+                        type: string
+                      last:
+                        type: string
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                        id:
+                          type: string
+                        attributes:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                        relationships:
+                          type: object
+                          properties:
+                            posts:
+                              type: object
+                              properties:
+                                links:
+                                  type: object
+                                  properties:
+                                    related:
+                                      type: string
+                                    self:
+                                      type: string
+                            data:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  type:
+                                    type: string
+                                  id:
+                                    type: string
+                        links:
+                          type: object
+                          properties:
+                            self:
+                              type: string
+                  included:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                        id:
+                          type: string
+                        attributes:
+                          type: object
+                          properties:
+                            title:
+                              type: string
+                            slug:
+                              type: string
+                            content:
+                              type: string
+                        relationships:
+                          type: object
+                          properties:
+                            author:
+                              type: object
+                              properties:
+                                related:
+                                  type: string
+                                self:
+                                  type: string
+                            comments:
+                              type: object
+                              properties:
+                                links:
+                                  type: object
+                                  properties:
+                                    related:
+                                      type: string
+                                    self:
+                                      type: string
+                            categories:
+                              type: object
+                              properties:
+                                links:
+                                  type: object
+                                  properties:
+                                    related:
+                                      type: string
+                                    self:
+                                      type: string
+                            tags:
+                              type: object
+                              properties:
+                                links:
+                                  type: object
+                                  properties:
+                                    related:
+                                      type: string
+                                    self:
+                                      type: string
+                        links:
+                          type: object
+                          properties:
+                            self: 
+                              type: string
+                        meta:
+                          type: object
+                          properties:
+                            published_at:
+                              type: string
+              example:
+                meta:
+                  page:
+                    currentPage: 1
+                    from: 1
+                    lastPage: 1
+                    perPage: 2
+                    to: 1
+                    total: 1
+                jsonapi:
+                  version: '1.0'
+                links:
+                  first: http://localhost/api/v1/categories?filter%5Bname%5D=Web&include=posts&page%5Blimit%5D=2&page%5Bpage%5D=1
+                  last: http://localhost/api/v1/categories?filter%5Bname%5D=Web&include=posts&page%5Blimit%5D=2&page%5Bpage%5D=1
+                data:
+                  - type: categories
+                    id: '1'
+                    attributes:
+                      name: Web Development
+                    relationships:
+                      posts:
+                        links:
+                          related: http://localhost/api/v1/categories/1/posts
+                          self: http://localhost/api/v1/categories/1/relationships/posts
+                        data:
+                          - type: posts
+                            id: '1'
+                    links:
+                      self: http://localhost/api/v1/categories/1
+                included:
+                  - type: posts
+                    id: '1'
+                    attributes:
+                      title: ut vero harum aut earum
+                      slug: modi-ea-tempora-impedit-dolorum-similique-expedita-suscipit
+                      content: Velit ipsa et nihil pariatur hic aliquam. Recusandae
+                        delectus cumque aliquid nihil animi quia. Accusamus
+                        ullam nihil qui exercitationem.
+                    relationships:
+                      author:
+                        links:
+                          related: http://localhost/api/v1/posts/1/author
+                          self: http://localhost/api/v1/posts/1/relationships/author
+                      comments:
+                        links:
+                          related: http://localhost/api/v1/posts/1/comments
+                          self: http://localhost/api/v1/posts/1/relationships/comments
+                      categories:
+                        links:
+                          related: http://localhost/api/v1/posts/1/categories
+                          self: http://localhost/api/v1/posts/1/relationships/categories
+                      tags:
+                        links:
+                          related: http://localhost/api/v1/posts/1/tags
+                          self: http://localhost/api/v1/posts/1/relationships/tags
+                    links:
+                      self: http://localhost/api/v1/posts/1
+                    meta:
+                      published_at: '2011-12-20T07:07:43.000000Z'
+        '400':
+          description: Bad Request
+          headers:
+            Host:
+              description: "Host address"
+              schema:
+                type: string
+                example: localhost:80
+            Connection:
+              description: "Connection string"
+              schema:
+                type: string
+                example: close
+            X-Powered-By:
+              description: "Information about the technology used on the server"
+              schema:
+                type: string
+                example: PHP/8.3.3-1+ubuntu22.04.1+deb.sury.org+1
+            Content-Type:
+              description: "Content type"
+              schema:
+                type: string
+                example: application/vnd.api+json
+            Accept:
+              description: "Content type that the client is willing to accept"
+              schema:
+                type: string
+                example: application/vnd.api+json
+            Cache-Control:
+              description: "Cache control directives"
+              schema:
+                type: string
+                example: no-cache, private
+            Date:
+              description: "Response date"
+              schema:
+                type: string
+                example: Thu, 29 Feb 2024 06:16:38 GMT
+            X-RateLimit-Limit:
+              description: "Maximum number of requests allowed in a defined period"
+              schema:
+                type: integer
+                example: '60'
+            X-RateLimit-Remaining:
+              description: "Number of remaining requests before reaching the limit"
+              schema:
+                type: integer
+                example: '57'
+            Access-Control-Allow-Origin:
+              description: "Allowed origin for requests (CORS)"
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  jsonapi:
+                    type: object
+                    properties:
+                      version:
+                        type: string
+                  errors: 
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        detail:
+                          type: string
+                        source:
+                          type: object
+                          properties:
+                            parameter:
+                              type: string
+                        status:
+                          type: string
+                        title:
+                          type: string
+              example:
+                jsonapi:
+                  version: '1.0'
+                errors:
+                  - detail: Filter parameter names is not allowed.
+                    source:
+                      parameter: filter
+                    status: '400'
+                    title: Invalid Query Parameter
+        '406':
+          description: Not Acceptable
+          headers:
+            Host:
+              description: "Host address"
+              schema:
+                type: string
+                example: localhost:80
+            Connection:
+              description: "Connection string"
+              schema:
+                type: string
+                example: close
+            X-Powered-By:
+              description: "Information about the technology used on the server"
+              schema:
+                type: string
+                example: PHP/8.3.3-1+ubuntu22.04.1+deb.sury.org+1
+            Content-Type:
+              description: "Content type"
+              schema:
+                type: string
+                example: application/vnd.api+json
+            Accept:
+              description: "Content type that the client is willing to accept"
+              schema:
+                type: string
+                example: application/vnd.api+json
+            Cache-Control:
+              description: "Cache control directives"
+              schema:
+                type: string
+                example: no-cache, private
+            Date:
+              description: "Response date"
+              schema:
+                type: string
+                example: Thu, 29 Feb 2024 06:16:38 GMT
+            X-RateLimit-Limit:
+              description: "Maximum number of requests allowed in a defined period"
+              schema:
+                type: integer
+                example: '60'
+            X-RateLimit-Remaining:
+              description: "Number of remaining requests before reaching the limit"
+              schema:
+                type: integer
+                example: '57'
+            Access-Control-Allow-Origin:
+              description: "Allowed origin for requests (CORS)"
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  exception:
+                    type: string
+                  file:
+                    type: string
+                  line:
+                    type: integer
+                  trace:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        file:
+                          type: string
+                        line:
+                          type: integer
+                        function:
+                          type: string
+                        class:
+                          type: string
+                        type:
+                          type: string
+              example:
+                message: The requested resource is capable of generating only content
+                  not acceptable according to the Accept headers sent in the
+                  request.
+                exception: LaravelJsonApi\Laravel\Exceptions\HttpNotAcceptableException
+                file: /var/www/html/vendor/laravel-json-api/laravel/src/Http/Requests/ResourceQuery.php
+                line: 338
+                trace:
+                  - file: /var/www/html/vendor/laravel-json-api/laravel/src/Http/Requests/ResourceQuery.php
+                    line: 287
+                    function: notAcceptable
+                    class: LaravelJsonApi\Laravel\Http\Requests\ResourceQuery
+                    type: '->'
+                  - file: /var/www/html/vendor/laravel/framework/src/Illuminate/Validation/ValidatesWhenResolvedTrait.php
+                    line: 19
+                    function: prepareForValidation
+                    class: LaravelJsonApi\Laravel\Http\Requests\ResourceQuery
+                    type: '->'
