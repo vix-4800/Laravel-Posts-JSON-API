@@ -27,9 +27,9 @@ class UserSchema extends Schema
         return [
             ID::make(),
 
-            Str::make('name')->readOnly(),
-            Str::make('email')->readOnly(),
-            DateTime::make('email_verified_at')->readOnly(),
+            Str::make('name')->readOnly()->sortable(),
+            Str::make('email')->readOnly()->sortable(),
+            DateTime::make('email_verified_at')->readOnly()->notSortable(),
 
             HasMany::make('posts')->readOnly(),
             HasMany::make('comments')->readOnly(),

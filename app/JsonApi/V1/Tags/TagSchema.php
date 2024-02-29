@@ -27,7 +27,7 @@ class TagSchema extends Schema
         return [
             ID::make(),
 
-            Str::make('name'),
+            Str::make('name')->sortable(),
 
             BelongsToMany::make('posts')->readOnly(),
 

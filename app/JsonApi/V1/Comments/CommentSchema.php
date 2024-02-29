@@ -27,7 +27,7 @@ class CommentSchema extends Schema
         return [
             ID::make(),
 
-            Str::make('content'),
+            Str::make('content')->notSortable(),
 
             BelongsTo::make('user')->readOnly(),
             BelongsTo::make('post')->readOnly(),

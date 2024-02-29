@@ -37,9 +37,9 @@ class PostSchema extends Schema
             ID::make(),
 
             Str::make('title')->sortable(),
-            Str::make('slug'),
-            Str::make('content'),
-            DateTime::make('published_at')->readOnly(),
+            Str::make('slug')->sortable(),
+            Str::make('content')->notSortable(),
+            DateTime::make('published_at')->sortable(),
 
             BelongsTo::make('author')->type('users')->readOnly(),
             HasMany::make('comments')->readOnly(),
