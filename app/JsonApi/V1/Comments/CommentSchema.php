@@ -2,6 +2,7 @@
 
 namespace App\JsonApi\V1\Comments;
 
+use App\JsonApi\Filters\WhereLikeFilter;
 use App\Models\Comment;
 use LaravelJsonApi\Eloquent\Contracts\Paginator;
 use LaravelJsonApi\Eloquent\Fields\DateTime;
@@ -44,6 +45,7 @@ class CommentSchema extends Schema
     {
         return [
             WhereIdIn::make($this),
+            WhereLikeFilter::make('content'),
         ];
     }
 

@@ -2,6 +2,7 @@
 
 namespace App\JsonApi\V1\Posts;
 
+use App\JsonApi\Filters\WhereLikeFilter;
 use App\Models\Post;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
@@ -58,6 +59,9 @@ class PostSchema extends Schema
     {
         return [
             WhereIdIn::make($this),
+            WhereLikeFilter::make('title'),
+            WhereLikeFilter::make('slug'),
+            WhereLikeFilter::make('content'),
         ];
     }
 

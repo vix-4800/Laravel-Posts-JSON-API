@@ -2,6 +2,7 @@
 
 namespace App\JsonApi\V1\Categories;
 
+use App\JsonApi\Filters\WhereLikeFilter;
 use App\Models\Category;
 use LaravelJsonApi\Eloquent\Contracts\Paginator;
 use LaravelJsonApi\Eloquent\Fields\DateTime;
@@ -43,6 +44,7 @@ class CategorySchema extends Schema
     {
         return [
             WhereIdIn::make($this),
+            WhereLikeFilter::make('name'),
         ];
     }
 

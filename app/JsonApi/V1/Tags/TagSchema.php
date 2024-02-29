@@ -2,6 +2,7 @@
 
 namespace App\JsonApi\V1\Tags;
 
+use App\JsonApi\Filters\WhereLikeFilter;
 use App\Models\Tag;
 use LaravelJsonApi\Eloquent\Contracts\Paginator;
 use LaravelJsonApi\Eloquent\Fields\DateTime;
@@ -43,6 +44,7 @@ class TagSchema extends Schema
     {
         return [
             WhereIdIn::make($this),
+            WhereLikeFilter::make('name'),
         ];
     }
 

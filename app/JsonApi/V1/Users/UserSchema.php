@@ -2,6 +2,7 @@
 
 namespace App\JsonApi\V1\Users;
 
+use App\JsonApi\Filters\WhereLikeFilter;
 use App\Models\User;
 use LaravelJsonApi\Eloquent\Contracts\Paginator;
 use LaravelJsonApi\Eloquent\Fields\DateTime;
@@ -46,6 +47,8 @@ class UserSchema extends Schema
     {
         return [
             WhereIdIn::make($this),
+            WhereLikeFilter::make('name'),
+            WhereLikeFilter::make('email'),
         ];
     }
 
