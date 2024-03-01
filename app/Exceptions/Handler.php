@@ -5,6 +5,7 @@ namespace App\Exceptions;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use LaravelJsonApi\Core\Exceptions\JsonApiException;
 use LaravelJsonApi\Exceptions\ExceptionParser;
+use LaravelJsonApi\Laravel\Exceptions\HttpNotAcceptableException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -43,5 +44,25 @@ class Handler extends ExceptionHandler
         $this->renderable(
             ExceptionParser::make()->renderable()
         );
+    }
+
+    public function render($request, Throwable $e)
+    {
+        if ($e instanceof HttpNotAcceptableException) {
+            return response()->json([
+                "jsonapi" => [
+                    "version" => "1.0"
+                ],
+                "errors" => [
+                    [
+                        "detail" => "The requested resource is only capable of generating 'application/vnd.api+json' content. Wrong Accept header",
+                        "status" => "406",
+                        "title" => "Not Acceptable",
+                    ]
+                ]
+            ])->setStatusCode(406);
+        }
+
+        return parent::render($request, $e);
     }
 }

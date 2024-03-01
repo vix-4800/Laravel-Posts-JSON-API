@@ -447,45 +447,26 @@ paths:
               schema:
                 type: object
                 properties:
-                  message:
-                    type: string
-                  exception:
-                    type: string
-                  file:
-                    type: string
-                  line:
-                    type: integer
-                  trace:
+                  jsonapi:
+                    type: object
+                    properties:
+                      version:
+                        type: string
+                  errors:
                     type: array
                     items:
                       type: object
                       properties:
-                        file:
+                        detail:
                           type: string
-                        line:
-                          type: integer
-                        function:
+                        status:
                           type: string
-                        class:
-                          type: string
-                        type:
+                        title:
                           type: string
               example:
-                message:
-                  The requested resource is capable of generating only content
-                  not acceptable according to the Accept headers sent in the
-                  request.
-                exception: LaravelJsonApi\Laravel\Exceptions\HttpNotAcceptableException
-                file: /var/www/html/vendor/laravel-json-api/laravel/src/Http/Requests/ResourceQuery.php
-                line: 338
-                trace:
-                  - file: /var/www/html/vendor/laravel-json-api/laravel/src/Http/Requests/ResourceQuery.php
-                    line: 287
-                    function: notAcceptable
-                    class: LaravelJsonApi\Laravel\Http\Requests\ResourceQuery
-                    type: "->"
-                  - file: /var/www/html/vendor/laravel/framework/src/Illuminate/Validation/ValidatesWhenResolvedTrait.php
-                    line: 19
-                    function: prepareForValidation
-                    class: LaravelJsonApi\Laravel\Http\Requests\ResourceQuery
-                    type: "->"
+                jsonapi:
+                  version: "1.0"
+                errors:
+                  - detail: The requested resource is only capable of generating 'application/vnd.api+json' content. Wrong Accept header
+                    status: "406"
+                    title: Not Acceptable
