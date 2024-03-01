@@ -38,4 +38,9 @@ class Category extends Model
     {
         return $this->belongsToMany(Post::class, 'post_category');
     }
+
+    public function getPostCountAttribute(): int
+    {
+        return $this->posts->count();
+    }
 }

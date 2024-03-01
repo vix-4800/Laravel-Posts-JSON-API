@@ -16,6 +16,7 @@ class CategoryResource extends JsonApiResource
     {
         return [
             'name' => $this->name,
+            'post_count' => $this->post_count,
         ];
     }
 
