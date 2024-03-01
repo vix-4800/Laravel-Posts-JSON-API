@@ -146,6 +146,8 @@ paths:
                           properties:
                             name:
                               type: string
+                            post_count:
+                              type: integer
                         relationships:
                           type: object
                           properties:
@@ -260,6 +262,7 @@ paths:
                     id: "1"
                     attributes:
                       name: Web Development
+                      post_count: 75
                     relationships:
                       posts:
                         links:
